@@ -50,7 +50,7 @@
 
 우선 HTTP통신은 클라이언트와 서버로 이분된 구조를 가진다. 
 
-![Untitled](HTTP%E1%84%8B%E1%85%AA%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%90%E1%85%A9%E1%84%8F%E1%85%A9%E1%86%AF%20c4c4745814eb49ceaa3d1b3338164e8f/Untitled.png)
+<img src="https://github.com/976520/TIL/assets/123460320/5f58a5a1-3f1c-462a-9fd9-3f216cb71092" width="400"/>
 
 1. 특징
     1. TCP/IP를 이용하는 응용 프로토콜이다.
@@ -91,7 +91,7 @@
 1. Request
     1. HTTP 요청 메시지 형식은 다음과 같다.
         
-        ![Untitled](HTTP%E1%84%8B%E1%85%AA%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%90%E1%85%A9%E1%84%8F%E1%85%A9%E1%86%AF%20c4c4745814eb49ceaa3d1b3338164e8f/Untitled%201.png)
+        <img src="https://github.com/976520/TIL/assets/123460320/b5939c22-b3ce-4e04-a0cc-248505994b7d" width="400"/>
         
         1. Start line
             

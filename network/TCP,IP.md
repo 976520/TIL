@@ -46,7 +46,7 @@
         
         아래 페이지에 기술된 SMTP, HTTP 등 TCP를 기반으로 하는 많은 응용 계층 프로토콜이 IP 위에서 동작하기 때문에, 묶어서 TCP/IP로 불리기도 한다. 
         
-        [HTTP와 프로토콜](HTTP%E1%84%8B%E1%85%AA%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%90%E1%85%A9%E1%84%8F%E1%85%A9%E1%86%AF%20c4c4745814eb49ceaa3d1b3338164e8f.md)
+        [HTTP와 프로토콜](https://github.com/976520/TIL/blob/main/network/HTTP%EC%99%80%20%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C.md)
         
     2. 전송 계층 (Transport Layer)
         

@@ -125,18 +125,17 @@
             
             만약 리소스가 있을 시 이를 완전히 대체하며, 없을 시 리소스를 생성한다.
             
-            ![Untitled](HTTP%E1%84%8B%E1%85%AA%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%90%E1%85%A9%E1%84%8F%E1%85%A9%E1%86%AF%20c4c4745814eb49ceaa3d1b3338164e8f/Untitled%202.png)
-            
-            ![Untitled](HTTP%E1%84%8B%E1%85%AA%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%90%E1%85%A9%E1%84%8F%E1%85%A9%E1%86%AF%20c4c4745814eb49ceaa3d1b3338164e8f/Untitled%203.png)
+            <img src="https://github.com/976520/TIL/assets/123460320/13fdff9b-c0fa-4e7b-a094-49f91c2cb30b" width="400" />
+            <br>
+            <img src="https://github.com/976520/TIL/assets/123460320/40785c53-894a-4d45-a44d-42c8de55b9da" width="400" />
             
         4. PATCH
             
             만약 리소스가 있을 시 요청한 부분만 대체한다.
             
-            ![Untitled](HTTP%E1%84%8B%E1%85%AA%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%90%E1%85%A9%E1%84%8F%E1%85%A9%E1%86%AF%20c4c4745814eb49ceaa3d1b3338164e8f/Untitled%204.png)
-            
-            ![Untitled](HTTP%E1%84%8B%E1%85%AA%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%90%E1%85%A9%E1%84%8F%E1%85%A9%E1%86%AF%20c4c4745814eb49ceaa3d1b3338164e8f/Untitled%205.png)
-            
+            <img src="https://github.com/976520/TIL/assets/123460320/13fdff9b-c0fa-4e7b-a094-49f91c2cb30b" width="400" />
+            <br>
+            <img src="https://github.com/976520/TIL/assets/123460320/25a5cb8c-7df4-4424-8b7d-61dffa15feca" width="400"/>
         5. DELETE
             
             리소스를 제거한다.

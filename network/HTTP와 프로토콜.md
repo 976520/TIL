@@ -25,7 +25,7 @@
 2. 종류
     1. **TCP/IP** (Transmission Control Protocol / Internet Protocol)
         
-        [TCP/IP](TCP%20IP%20b6ee4387c8a249dc8165a73b3ec5a688.md)
+        [TCP/IP](https://github.com/976520/TIL/blob/main/network/TCP%2CIP.md)
         
     2. **UDP** (User Datagram Protocol)
         

@@ -91,7 +91,7 @@
 1. Request
     1. HTTP 요청 메시지 형식은 다음과 같다.
         
-        <img src="https://github.com/976520/TIL/assets/123460320/b5939c22-b3ce-4e04-a0cc-248505994b7d" width="400"/>
+        <img src="https://github.com/976520/TIL/assets/123460320/b5939c22-b3ce-4e04-a0cc-248505994b7d" width="300"/>
         
         1. Start line
             메소드 + URL + 버전 으로 이루어져있다. 

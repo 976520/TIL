@@ -94,21 +94,17 @@
         <img src="https://github.com/976520/TIL/assets/123460320/b5939c22-b3ce-4e04-a0cc-248505994b7d" width="400"/>
         
         1. Start line
-            
             메소드 + URL + 버전 으로 이루어져있다. 
             
             URL은 대상 경로를 표시하는 것이며, 버전은 사용된 HTTP의 버전을 뜻한다.
             
         2. headers
-            
             여기는 HTTP 전송에 필요한 모든 부가 정보를 담는 곳이다.
             
         3. blank line
-            
             요청에 대한 모든 메타 정보가 전송되었음을 알리는 용도이다.
             
         4. body
-            
             요청을 할 때 함께 보낼 데이터를 담는 부분으로, GET, HEAD, DELETE, OPTIONS처럼 리소스를 가져요는 요청은 Body에 포함하지 않는다.
             
         

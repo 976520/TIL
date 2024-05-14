@@ -64,7 +64,7 @@ DOM구조를 조회할 때는 `console.dir` 을 사용한다. 이는 `console.lo
     
 4. 특정 id를 가진 엘리먼트의 부모요소 ~~느그 아부지 뭐하시노~~
     
-    `console.dir(document.body.children[n].parentElement)` 는 n번째 자식 요소의 부모요소를 조회하는 코드이다. 정말 읽기 불편하기 때문에 아까와 같이변수 선언을 해서 가독성을 높여보겠다. 
+    `console.dir(document.body.children[n].parentElement)` 는 n번째 자식 요소의 부모요소를 조회하는 코드이다. 정말 읽기 불편하기 때문에 아까와 같이 변수 선언을 해서 가독성을 높여보겠다. 
     
     ```jsx
     const exampleId = document.body.children[3]

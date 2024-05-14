@@ -1,8 +1,3 @@
-# DOM
-
-태그: FrontEnd
-링크: https://john-cho.medium.com/dom-101-ed14cff6e2ce
-
 # DOM?
 
 > DOM은 XML, HTML 문서의 각 항목을 계층으로 표현하여 생성, 변형, 삭제 할 수 있도록 돕는 인터페이스이다.

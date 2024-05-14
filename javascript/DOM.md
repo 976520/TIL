@@ -7,6 +7,8 @@ DOM은 Document Object Model(문서 객체 모델)의 약자로  JS에서 HTML�
 
 ---
 
+
+
 ## DOM 개념
 
 다음과 같은 HTML 문서가 있다고 가정해보자.
@@ -26,7 +28,7 @@ DOM은 Document Object Model(문서 객체 모델)의 약자로  JS에서 HTML�
 
 이렇게 텍스트 파일로 만들어진 문서를 브라우저에 렌더링하려면 이를 브라우저가 이해할 수 있는 구조로 메모리에 올려야 한다. 브라우저에 내장된 화면을 그리는 엔진(rendering engine)이 이 문서를 로드한 후, 다음과 같이 파싱하여 브라우저가 이해할 수 있는 구조로 표현하고 메모리에 로드하는데, 이를 DOM이라고 부르는 것이다. 
 
-![Untitled](DOM%208a3c4aea8db44552a9cd9b1ce88b6ab1/Untitled.png)
+<img src="https://github.com/976520/TIL/assets/123460320/a5a08e31-c5c2-4521-a1bd-7793ab3ddbd2" width="400"/>
 
 즉, 모든 요소와 속성을 객체로 만들고, 이 객체를 부모-자식 관계를 표현하는 트리 구조로 구성한 것이 DOM이다. DOM의 의의는 DOM이 제공하는 API를 이용해 개발자가 JS로 이것을 조작할 수 있는 데에 있다. JS는 이것을 이용해 HTML 요소나 style을 생성/변경/삭제하거나 event를 추가하고 그에 반응할 수 있다.
 
@@ -39,16 +41,17 @@ DOM구조를 조회할 때는 `console.dir` 을 사용한다. 이는 `console.lo
 1. <body>의 자식요소
     
     `console.dir(document.body)` 를 입력하여 body 아래의 모든 속성을 객체의 형태로 확인할 수 있다. 이중 chileren이 body의 자식요소를 뜻한다.
+   
+    <img src="https://github.com/976520/TIL/assets/123460320/6b0a5d3a-d22e-4ac3-8884-6ac3872c222b" width="800"/>
     
-    ![Untitled](DOM%208a3c4aea8db44552a9cd9b1ce88b6ab1/Untitled%201.png)
     
     정신없으니까 `console.dir(document.body.children)` 을 통해 자식 요소만 골라내보자.
     
-    ![Untitled](DOM%208a3c4aea8db44552a9cd9b1ce88b6ab1/Untitled%202.png)
+    <img src="https://github.com/976520/TIL/assets/123460320/e2b3b60b-4cc8-403d-84ac-9e458ec65bb4" width="400"/>
     
     여기서 `console.dir(document.body.children[n])` 으로 n번째 자식만을 조회할 수 있다.
     
-2. 특정 id를 가진 엘리먼트의 자식요소
+3. 특정 id를 가진 엘리먼트의 자식요소
     
     매번 자식요소를 조회할 때 마다 `console.dir(document.body.children[3])` 이런걸 쓰고 있으면 귀찮기 마련이다. 이럴 때 따로 변수 선언을 하고 id를 할당하면 번거롭지 않을 수 있다.
     
@@ -57,7 +60,7 @@ DOM구조를 조회할 때는 `console.dir` 을 사용한다. 이는 `console.lo
     console.dir(exampleId)
     ```
     
-3. 특정 id를 가진 엘리먼트의 부모요소 ~~느그 아부지 뭐하시노~~
+4. 특정 id를 가진 엘리먼트의 부모요소 ~~느그 아부지 뭐하시노~~
     
     `console.dir(document.body.children[n].parentElement)` 는 n번째 자식 요소의 부모요소를 조회하는 코드이다. 정말 읽기 불편하기 때문에 아까와 같이변수 선언을 해서 가독성을 높여보겠다. 
     

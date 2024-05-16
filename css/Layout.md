@@ -1,7 +1,3 @@
-# Layout
-
-태그: FrontEnd
-
 # 레이아웃 설계
 
 > 레이아웃(layout)이란, HTML 태그로 작성한 구성 요소를 제한된 공간 안에 효과적으로 배열하는 일을 의미한다.
@@ -22,7 +18,7 @@ display: flex;
         
         플렉스 박스 레이아웃에서는 다음과 같은 독자적인 구성 요소가 존재한다.
         
-        ![Untitled](Layout%209cd8abbb4bb3403f9b2bd22a4fbc0f5d/Untitled.png)
+        <img src="https://github.com/976520/TIL/assets/123460320/3f19f70a-6b8a-44e7-8877-99d1fad01233"/>
         
         1. main axis (주축)
             
@@ -46,11 +42,11 @@ display: flex;
         
         개발자 도구의 Elements 탭으로 가면, 플렉스 박스 레이아웃이 적용된 HTML element는 옆에 flex 아이콘이 있는 것을 확인할 수 있다. 
         
-        ![Untitled](Layout%209cd8abbb4bb3403f9b2bd22a4fbc0f5d/Untitled%201.png)
+        <img src="https://github.com/976520/TIL/assets/123460320/1fcbb8ab-aa97-43f6-8201-ef407cbbecda" height="400px"/>
         
         이를 클릭하면 해당 요소의 플렉스 박스 레이아웃이 시각적으로 표시된다.
         
-        ![Untitled](Layout%209cd8abbb4bb3403f9b2bd22a4fbc0f5d/Untitled%202.png)
+        <img src="https://github.com/976520/TIL/assets/123460320/57ab2d25-28fc-4c6c-9e3a-cd652fbb2a4f" height="150px"/>
         
 2. 속성
     

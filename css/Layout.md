@@ -101,14 +101,14 @@ display: flex;
             
             - `stretch` cross axis 방향으로 item의 너비 또는 높이가 늘어난다.
                 
-                ![Untitled](Layout%209cd8abbb4bb3403f9b2bd22a4fbc0f5d/Untitled%206.png)
+                <img src="https://github.com/976520/TIL/assets/123460320/aa1e93c9-84b1-455a-b177-10bf74e47068" width="500"/>
                 
             - `flex-start` cross axis 방향의 시작을 기준으로 정렬한다.
             - `flex-end` cross axis 방향의 끝을 기준으로 정렬한다
             - `center` cross axis 방향의 중앙을 기준으로 정렬한다.
             - `baseline` item의 baseline을 기준으로 정렬한다.
                 
-                ![Untitled](Layout%209cd8abbb4bb3403f9b2bd22a4fbc0f5d/Untitled%207.png)
+                <imt src="https://github.com/976520/TIL/assets/123460320/57b0c56e-ceed-48d6-9491-adc83076a509" width="500"/>
                 
             
 
@@ -127,7 +127,7 @@ display: grid;
         
         그리드 레이아웃에서 사용하는 구성 요소는 다음과 같다.
         
-        ![Untitled](Layout%209cd8abbb4bb3403f9b2bd22a4fbc0f5d/Untitled%208.png)
+        <img src="https://github.com/976520/TIL/assets/123460320/7effc5f9-5344-412b-8fb9-9dca4b3bf26a" width="500px"/>
         
         1. row (행)
             
@@ -161,12 +161,14 @@ display: grid;
     2. 레이아웃 확인 방법
         
         그리드 레이아웃도 플렉스 박스처럼 레이아웃을 시각적으로 확인하기 위해 크롬 브라우저의 개발자 도구를 이용한다. Elements 탭에서 그리드 컨테이너로 지정된 태그를 보면 grid 아이콘이 보인다.
+       
+        <img src="https://github.com/976520/TIL/assets/123460320/a4ee148a-87b7-4759-bc94-b2685eeef69c" width="500"/>
         
-        ![Untitled](Layout%209cd8abbb4bb3403f9b2bd22a4fbc0f5d/Untitled%209.png)
+       
         
         이를 클릭하면 브라우저에서 그리드 레이아웃의 구성 요소를 확인할 수 있다.
+        <img src="https://github.com/976520/TIL/assets/123460320/fdd45a80-83b4-4a58-b550-d9d03577946a" width="600"/>
         
-        ![Untitled](Layout%209cd8abbb4bb3403f9b2bd22a4fbc0f5d/Untitled%2010.png)
         
 2. 속성
     1. 기본 속성
@@ -211,32 +213,37 @@ display: grid;
     2. 정렬 속성
         1. `align-items` `aligin-self`
             - `stretch` item이 grid cell을 채우도록 크기를 늘린다.
+              
                 
-                ![Untitled](Layout%209cd8abbb4bb3403f9b2bd22a4fbc0f5d/Untitled%2011.png)
+                <img src="https://github.com/976520/TIL/assets/123460320/8d2753ee-4107-4b96-8bae-787934db1615" width=500/>
                 
             - `start` item이 grid cell의 맨 위에 배치된다.
                 
-                ![Untitled](Layout%209cd8abbb4bb3403f9b2bd22a4fbc0f5d/Untitled%2012.png)
+                
+                <img src="https://github.com/976520/TIL/assets/123460320/4ffb9047-6ce5-4f39-b67e-ff139d9ddbe3" width="500"/>
                 
             - `end` item이 grid cell의 맨 아래에 배치된다.
             - `center` item이 grid cell의 세로 방향 중간에 배치된다.
+                <img src="https://github.com/976520/TIL/assets/123460320/d47c5f0a-fb7e-4f7d-a537-5aad9fe7a898" width="500"/>
                 
-                ![Untitled](Layout%209cd8abbb4bb3403f9b2bd22a4fbc0f5d/Untitled%2013.png)
                 
             
-        2. `justify-items` `justify-self`
+        3. `justify-items` `justify-self`
             - `stretch`  item이 grid cell을 채우도록 늘린다.
+              
                 
-                ![Untitled](Layout%209cd8abbb4bb3403f9b2bd22a4fbc0f5d/Untitled%2011.png)
+                <img src="https://github.com/976520/TIL/assets/123460320/8d2753ee-4107-4b96-8bae-787934db1615" width=500/>
                 
             - `start` item이 grid cell의 좌측 끝에 배치된다.
             - `end` item이 grid cell의 우측 끝에 배치된다.
             - `center` item이 grid cell의 가로 방향 중간에 배치된다.
+  
+              <img src="https://github.com/976520/TIL/assets/123460320/6c1bb612-d540-4d40-9601-d109c3596ed4" width=500/>
                 
-                ![Untitled](Layout%209cd8abbb4bb3403f9b2bd22a4fbc0f5d/Untitled%2014.png)
+                
                 
             
-        3. `place-items` `place-self`
+        4. `place-items` `place-self`
             
             각각 `aligin-items`, `justify-items` 혹은 `aligin-self`, `justify-self` 속성을 한 번에 사용할 수 있는 단축 속성으로, 그 사용법은 다음과 같다.
             
@@ -283,7 +290,7 @@ display: grid;
             
             이러한 코드를 통해 다음과 같은 그리드 레이아웃을 완성할 수 있다.
             
-            ![Untitled](Layout%209cd8abbb4bb3403f9b2bd22a4fbc0f5d/Untitled%2015.png)
+            <img src="https://github.com/976520/TIL/assets/123460320/eadb66b5-d6b2-47b2-9be1-ffe74fee9d1d" width="500"/>
             
         2. `grid-column-start` `grid-column-end` `grid-row-start` `grid-row-end`
             
@@ -291,7 +298,7 @@ display: grid;
             
             이 4가지의 속성을 조합하여 item의 배치를 지정할 수 있다. 만약 다음 그림처럼 item을 배치하고 싶다면,
             
-            ![Untitled](Layout%209cd8abbb4bb3403f9b2bd22a4fbc0f5d/Untitled%2016.png)
+           <img src="https://github.com/976520/TIL/assets/123460320/75bbfe3d-32e3-4f72-ab75-807a9cf570f8" width="500"/>
             
             다음과 같이 코드를 작성할 수 있다.
             

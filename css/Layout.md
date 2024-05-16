@@ -18,7 +18,7 @@ display: flex;
         
         플렉스 박스 레이아웃에서는 다음과 같은 독자적인 구성 요소가 존재한다.
         
-        <img src="https://github.com/976520/TIL/assets/123460320/3f19f70a-6b8a-44e7-8877-99d1fad01233"/>
+        <img src="https://github.com/976520/TIL/assets/123460320/3f19f70a-6b8a-44e7-8877-99d1fad01233" width="500"/>
         
         1. main axis (주축)
             
@@ -84,15 +84,15 @@ display: flex;
             - `center` main axis 방향의 중앙에 정렬한다.
             - `space-between` item 사이의 간격이 균일하도록 정렬한다.
                 
-                ![Untitled](Layout%209cd8abbb4bb3403f9b2bd22a4fbc0f5d/Untitled%203.png)
+                <img src="https://github.com/976520/TIL/assets/123460320/84174cac-8786-41de-a503-b64d2c650b6a" width="500"/>
                 
             - `space-around` item의 둘레(around)가 균일하도록 정렬한다.
-                
-                ![Untitled](Layout%209cd8abbb4bb3403f9b2bd22a4fbc0f5d/Untitled%204.png)
+          
+                <img src="https://github.com/976520/TIL/assets/123460320/74bb767e-c4d5-4d69-8a09-bbe170441c5d" width="500"/>
                 
             - `space-evenly` item 사이와 양 끝의 간격이 균일하도록 정렬한다.
                 
-                ![Untitled](Layout%209cd8abbb4bb3403f9b2bd22a4fbc0f5d/Untitled%205.png)
+                <img src="https://github.com/976520/TIL/assets/123460320/1bd3f7d6-741e-40df-99f1-ad1b405b86d4" width="500"/>
                 
             
         2. `aligin-items` `aligin-content` `aligin-self`
@@ -334,6 +334,6 @@ display: grid;
 
 ## 반응형
 
-[반응형 Layout](https://www.notion.so/Layout-ea029a9b998a438cac91cc3b267ca81c?pvs=21) 
+nothing here..
 
 ---

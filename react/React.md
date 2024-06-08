@@ -13,7 +13,7 @@
 
 1. Virtual DOM
     
-    [DOM](https://www.notion.so/DOM-8a3c4aea8db44552a9cd9b1ce88b6ab1?pvs=21) 
+    [DOM](https://github.com/976520/TIL/blob/main/javascript/DOM.md) 
     
 2. 컴포넌트(Component) 구조
     

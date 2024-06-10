@@ -101,7 +101,7 @@ display: grid;
 
              <img src="https://github.com/976520/TIL/assets/123460320/8d2753ee-4107-4b96-8bae-787934db1615" width=500/>
 
-         - `start` item이 grid cell의 맨 위에 배치된다.
+         - `start` item이 grid cell의 맨 위에 배치된다. <br/>
            <img src="https://github.com/976520/TIL/assets/123460320/4ffb9047-6ce5-4f39-b67e-ff139d9ddbe3" width="500"/>
 
          - `end` item이 grid cell의 맨 아래에 배치된다.

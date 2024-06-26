@@ -73,36 +73,36 @@
      콜백 지옥(callback hell)은 함수의 매개변수로 넘겨지는 콜백 함수가 과도하게 반복되어 코드의
      들여쓰기 수준이 심하게 깊어지는 현상이다. 
      ```js
-     setTimeout(function() {
-      console.log('Task 1');
-      setTimeout(function() {
-          console.log('Task 2');
-          setTimeout(function() {
-              console.log('Task 3');
-              setTimeout(function() {
-                  console.log('Task 4');
-                  setTimeout(function() {
-                      console.log('Task 5');
-                      setTimeout(function() {
-                          console.log('Task 6');
-                          setTimeout(function() {
-                              console.log('Task 7');
-                              setTimeout(function() {
-                                  console.log('Task 8');
-                                  setTimeout(function() {
-                                      console.log('Task 9');
-                                      setTimeout(function() {
-                                          console.log('Task 10');
-                                      }, 1000);
-                                  }, 1000);
-                              }, 1000);
-                          }, 1000);
-                      }, 1000);
-                  }, 1000);
-              }, 1000);
-          }, 1000);
+       setTimeout(function() {
+        console.log('Task 1');
+        setTimeout(function() {
+            console.log('Task 2');
+            setTimeout(function() {
+                console.log('Task 3');
+                setTimeout(function() {
+                    console.log('Task 4');
+                    setTimeout(function() {
+                        console.log('Task 5');
+                        setTimeout(function() {
+                            console.log('Task 6');
+                            setTimeout(function() {
+                                console.log('Task 7');
+                                setTimeout(function() {
+                                    console.log('Task 8');
+                                    setTimeout(function() {
+                                        console.log('Task 9');
+                                        setTimeout(function() {
+                                            console.log('Task 10');
+                                        }, 1000);
+                                    }, 1000);
+                                }, 1000);
+                            }, 1000);
+                        }, 1000);
+                    }, 1000);
+                }, 1000);
+            }, 1000);
+        }, 1000);
       }, 1000);
-    }, 1000);
 
      ```
 

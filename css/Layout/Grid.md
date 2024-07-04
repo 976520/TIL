@@ -120,7 +120,6 @@ display: grid;
 
            <img src="https://github.com/976520/TIL/assets/123460320/6c1bb612-d540-4d40-9601-d109c3596ed4" width=500/>
 
-
       3. `place-items` `place-self`
 
          각각 `aligin-items`, `justify-items` 혹은 `aligin-self`, `justify-self` 속성을 한 번에 사용할 수 있는 단축 속성으로, 그 사용법은 다음과 같다.

@@ -106,3 +106,15 @@
       단, 하나의 객체라도 rejected 상태가 되는 경우, 전체 작업이 실패한 것으로 간주한다. 이에 따라 `.all`의 promise 객체는 rejected 상태가 되며, 작업 실패 정보를 갖는다.
 
    5. race
+
+      ```javascript
+      prom()
+        .all([x, y, z])
+        .then((result) => {
+          // x, y, z 중 먼저 작업이 완료된 객체가 작업을 성공했다면 실행
+        }.catch((error)=>{
+          // x, y, z 중 먼저 작업이 완료된 객체가 작업을 실패했다면 실행
+        }));
+      ```
+
+      `.race`매서드도 `.all`과 같이 인자로 배열을 받으며, 이때 `.race`는 배열에서 가장 먼저 pending 상태를 벗어난 promise 객체와 동일한 상태, 결과를 가진다. 다른 말로 **가장 먼저 fulfilled 혹은 rejected 로 상태가 결정된 객체를 선택**한다.

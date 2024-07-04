@@ -66,8 +66,27 @@
 ## 사용
      
   1. Fetch
+
+     다음 코드에서 fetchData는 URL에서 데이터를 가져오고, 결과를 콜백 함수에 전달한다. handleData는 에러가 발생했는지 여부에 따라 적절한 메시지를 출력한다.
+
+     ```js
+     function fetchData(url, callback) {
+     fetch(url)
+          .then(response => response.json())
+          .then(data => callback(null, data))
+          .catch(error => callback(error, null));
+     }
+      
+     const handleData = (error, data) => {
+          error ? console.error('Error:', error) : console.log('Data:', data);
+     };
+      
+     fetchData('API_URL', handleData);
+
+
+       ```
      
-  2. 콜백 지옥
+  3. 콜백 지옥
      
      콜백 지옥(callback hell)은 함수의 매개변수로 넘겨지는 콜백 함수가 과도하게 반복되어 코드의
      들여쓰기 수준이 심하게 깊어지는 현상이다. 

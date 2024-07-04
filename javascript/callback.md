@@ -71,10 +71,10 @@
 
      ```js
      function fetchData(url, callback) {
-     fetch(url)
-          .then(response => response.json())
-          .then(data => callback(null, data))
-          .catch(error => callback(error, null));
+       fetch(url)
+            .then(response => response.json())
+            .then(data => callback(null, data))
+            .catch(error => callback(error, null));
      }
       
      const handleData = (error, data) => {

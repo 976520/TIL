@@ -72,13 +72,13 @@
      ```js
      function fetchData(url, callback) {
        fetch(url)
-            .then(response => response.json())
-            .then(data => callback(null, data))
-            .catch(error => callback(error, null));
+         .then(response => response.json())
+         .then(data => callback(null, data))
+         .catch(error => callback(error, null));
      }
       
      const handleData = (error, data) => {
-          error ? console.error('Error:', error) : console.log('Data:', data);
+       error ? console.error('Error:', error) : console.log('Data:', data);
      };
       
      fetchData('API_URL', handleData);

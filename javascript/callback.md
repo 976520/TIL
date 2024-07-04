@@ -48,7 +48,48 @@
      **함수 이름으로 인한 충돌 방지**를 위한 이유도 있다.
           
      ```js
-      는 현상이다. 
+       func(parameter, function(callback) {
+         console.log(callback);
+       });
+     ```
+     이처럼 콜백 함수를 익명 함수로 정의함으로써 코드의 간결성을 얻을 수 있다. 하지만 **익명 화살표 함수**
+     를 통해 더욱 간결해질 수 있다. 이는 이름에서 알 수 있듯, JS의 화살표 함수와 익명 함수가
+     합쳐진 것이다.
+     ```js
+       func(parameter, (callback) => {
+         console.log(callback);
+       });
+      ```
+     
+---
+
+## 사용
+     
+  1. Fetch
+
+     다음 코드에서 fetchData는 URL에서 데이터를 가져오고, 결과를 콜백 함수에 전달한다. handleData는 에러가 발생했는지 여부에 따라 적절한 메시지를 출력한다.
+
+     ```js
+     function fetchData(url, callback) {
+       fetch(url)
+         .then(response => response.json())
+         .then(data => callback(null, data))
+         .catch(error => callback(error, null));
+     }
+      
+     const handleData = (error, data) => {
+       error ? console.error('Error:', error) : console.log('Data:', data);
+     };
+      
+     fetchData('API_URL', handleData);
+
+
+       ```
+     
+  3. 콜백 지옥
+     
+     콜백 지옥(callback hell)은 함수의 매개변수로 넘겨지는 콜백 함수가 과도하게 반복되어 코드의
+     들여쓰기 수준이 심하게 깊어지는 현상이다. 
      ```js
        setTimeout(function() {
         console.log('Task 1');
@@ -82,4 +123,3 @@
       }, 1000);
 
      ```
-

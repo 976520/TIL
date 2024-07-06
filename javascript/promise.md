@@ -122,3 +122,7 @@
    이렇게 chaining이 가능한 이유는 handler에서 값을 return하면 그 반환값은 자동으로 promise 객체로 감싸져 다음 handler가 그것을 받게 되기 때문이다.
 
    만약 `.catch` handler 다음으로 `.then`이 이어져 있으면, 가까운 `.then`으로 제어 흐름이 넘어가 처리가 이어진다.
+
+   이러한 promise의 구조는 callback과 비슷한 문제를 일으킬 수 있다. 단적인 예시로, `.then` chain을 길게 이어나가면 코드의 가독성이 저해되고, 에러의 위치를 찾기 힘들다는 단점이 있을 수 있다. 이를 보완한 것이 바로...
+
+   [async/await]()

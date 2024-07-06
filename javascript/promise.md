@@ -119,4 +119,6 @@
 
       `.race`매서드도 `.all`과 같이 인자로 배열을 받으며, 이때 `.race`는 배열에서 가장 먼저 pending 상태를 벗어난 promise 객체와 동일한 상태, 결과를 가진다. 다른 말로 **가장 먼저 fulfilled 혹은 rejected 로 상태가 결정된 객체를 선택**한다.
 
-      ㅇ
+   이렇게 chaining이 가능한 이유는 handler에서 값을 return하면 그 반환값은 자동으로 promise 객체로 감싸져 다음 handler가 그것을 받게 되기 때문이다.
+
+   만약 `.catch` handler 다음으로 `.then`이 이어져 있으면, 가까운 `.then`으로 제어 흐름이 넘어가 처리가 이어진다.

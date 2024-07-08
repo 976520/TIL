@@ -24,7 +24,7 @@
 
 ## 사용
 
-1. fetch
+1. api 통신
 
    [promise](https://github.com/976520/TIL/blob/main/javascript/promise.md)를 쓸 때와, axios를 쓸 때와 비교하는 것이 중요하다.
 

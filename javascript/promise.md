@@ -133,7 +133,7 @@
 
 1. api 통신
 
-   [async, await](https://github.com/976520/TIL/blob/main/javascript/async%2C%20await.md)를 쓸 때와, axios를 쓸 때와 비교하는 것이 중요하다.
+   [async, await](https://github.com/976520/TIL/blob/main/javascript/async%2C%20await.md)를 쓸 때와, [axios](https://github.com/976520/TIL/blob/main/javascript/axios.md)를 쓸 때와 비교하는 것이 중요하다.
 
    ```javascript
    function example() {

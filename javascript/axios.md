@@ -10,7 +10,7 @@ npm install axios
 
 ---
 
-# 사용
+## 사용
 
 1. api 통신
 

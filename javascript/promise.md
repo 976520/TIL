@@ -125,4 +125,22 @@
 
    이러한 promise의 구조는 callback과 비슷한 문제를 일으킬 수 있다. 단적인 예시로, `.then` chain을 길게 이어나가면 코드의 가독성이 저해되고, 에러의 위치를 찾기 힘들다는 단점이 있을 수 있다. 이를 보완한 것이 바로...
 
-   [async/await]()
+   [async, await](https://github.com/976520/TIL/blob/main/javascript/async%2C%20await.md)
+
+---
+
+## 사용
+
+1. fetch
+
+   [async, await](https://github.com/976520/TIL/blob/main/javascript/async%2C%20await.md)를 쓸 때와, axios를 쓸 때와 비교하는 것이 중요하다.
+
+   ```javascript
+   function example() {
+     fetch(url)
+       .then((response) => {
+         return response.json();
+       })
+       .then((data) => console.log(data));
+   }
+   ```

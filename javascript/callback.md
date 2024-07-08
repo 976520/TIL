@@ -124,8 +124,4 @@
    }, 1000);
    ```
 
-   이러한 콜백 지옥 현상은 다음 두 방법을 통해 해결할 수 있다.
-
-   1. [Promise](https://github.com/976520/TIL/blob/main/javascript/promise.md)
-
-   2. async/await
+   이러한 콜백 지옥 현상은 [promise](https://github.com/976520/TIL/blob/main/javascript/promise.md)를 통해 해결할 수 있다.

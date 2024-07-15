@@ -8,7 +8,7 @@
 
 1. 정의
 
-   `async`가 붙은 함수는 promise를 반환하며 그 안에서~~만~~ `await` 키워드를 사용할 수 있다.
+   `async`가 붙은 함수는 promise를 반환하며 그 안에서만 `await` 키워드를 사용할 수 있다.
 
    promise 앞에 `await`를 붙이면 그 promise가 처리될 때 까지 코드 실행을 일시적으로 정지한다. 처리가 완료될 시, 오류가 발생하지 않았다면 promise 객체의 결과값을 return한다.
 

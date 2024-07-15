@@ -169,8 +169,6 @@ npm install axios
          };
          ```
 
-fetchBinaryData();
-
 ---
 
 ## 사용

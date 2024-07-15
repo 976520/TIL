@@ -21,6 +21,7 @@
    이 글의 주제인 HTTP도 이러한 프로토콜의 일종으로써, 통신의 규칙을 정한 것이다.
 
 2. 종류
+
    1. **TCP/IP** (Transmission Control Protocol / Internet Protocol)
 
       [TCP/IP](https://github.com/976520/TIL/blob/main/network/TCP%2CIP.md)
@@ -50,6 +51,7 @@
 <img src="https://github.com/976520/TIL/assets/123460320/5f58a5a1-3f1c-462a-9fd9-3f216cb71092" width="400"/>
 
 1. 특징
+
    1. **TCP/IP를 이용**하는 응용 프로토콜이다.
    2. HTTP는 연결 상태를 유지하지 않는 **비연결성** 프로토콜이다.
 
@@ -67,7 +69,9 @@
       3. JSON, XML(API)
       4. 그 외의 여러 형태의 데이터들..
    5. 기본 포트로 80번을 쓴다.
+
 2. 동작
+
    1. 앞서 언급한 대로 HTTP는 무상태 프로토콜이다.
 
       때문에, 클라이언트가 서버에 요청을 보내기 전에 Connect(연결)하는 작업이 요구되며, 서버의 응답을 받으면 Close(종료)된다.
@@ -81,6 +85,7 @@
 ## HTTP 메시지
 
 1. Request
+
    1. HTTP 요청 메시지 형식은 다음과 같다.
 
       <img src="https://github.com/976520/TIL/assets/123460320/b5939c22-b3ce-4e04-a0cc-248505994b7d" width="300"/>
@@ -104,24 +109,26 @@
          요청을 할 때 함께 보낼 데이터를 담는 부분으로, GET, HEAD, DELETE, OPTIONS처럼 리소스를 가져요는 요청은 Body에 포함하지 않는다.
 
    2. 다음은 HTTP에서 지원하는 메소드의 일부를 기술한 것이다.
+
       1. `GET` **리소스를 조회**한다. 메시지 바디를 이용해서 데이터를 전달할 수 있지만, 지원하지 않는 곳이 더 많아서 권장하지 않는다.
       2. `POST` 요청 **데이터를 처리**한다. 메시지 바디를 이용해서 서버로 요청 데이터를 전달하며, 서버는 이를 통해 들어온 데이터를 처리하는 모든 기능을 수행한다.
       3. `PUT` 만약 리소스가 있을 시 이를 **완전히 대체**하며, 없을 시 리소스를 생성한다.
 
-      <img src="https://github.com/976520/TIL/assets/123460320/13fdff9b-c0fa-4e7b-a094-49f91c2cb30b" width="400" />
-      <br>
-      <img src="https://github.com/976520/TIL/assets/123460320/40785c53-894a-4d45-a44d-42c8de55b9da" width="400" />
+         <img src="https://github.com/976520/TIL/assets/123460320/13fdff9b-c0fa-4e7b-a094-49f91c2cb30b" width="400" />
+         <br>
+         <img src="https://github.com/976520/TIL/assets/123460320/40785c53-894a-4d45-a44d-42c8de55b9da" width="400" />
 
       4. `PATCH` 만약 리소스가 있을 시 **요청한 부분만 대체**한다.
 
-      <img src="https://github.com/976520/TIL/assets/123460320/13fdff9b-c0fa-4e7b-a094-49f91c2cb30b" width="400" />
-      <br>
-      <img src="https://github.com/976520/TIL/assets/123460320/25a5cb8c-7df4-4424-8b7d-61dffa15feca" width="400"/>
+         <img src="https://github.com/976520/TIL/assets/123460320/13fdff9b-c0fa-4e7b-a094-49f91c2cb30b" width="400" />  
+         <br>
+         <img src="https://github.com/976520/TIL/assets/123460320/25a5cb8c-7df4-4424-8b7d-61dffa15feca" width="400"/>
 
       5. `DELETE` 리소스를 제거한다.
       6. `HEAD` 헤더 정보만 요청한다.
       7. `OPTIONS` 서버가 지원하는 메서드의 종류를 받는다.
       8. `TRACE` 클라이언트가 서버에 송신한 내용을 반환한다.
+
 2. Response
 
    HTTP state라고 하며, HTTP요청에 대한 서버의 응답 코드이다. 이는 첫번째 숫자에 따라 크게 5가지로 분류된다.

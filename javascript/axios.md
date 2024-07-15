@@ -25,28 +25,66 @@ npm install axios
    ```javascript
    axios({
      url: "대충 통신할 URL",
-     method: "대충 HTTP 메소드",
      data: {
        data: "대충 인자로 보낼 데이터",
      },
    });
    ```
 
-   axios를 이용한 요청 중에서 `url`, `method`와 같은 파라미터 옵션을 추가할 수 있으며, 그 종류는 다음과 같다.
+   axios를 이용한 요청 중에서 `url`, `data`와 같은 파라미터 옵션을 추가할 수 있으며, 그 종류는 다음과 같다.
 
 2. 옵션
 
    1. `method`
 
-   2. `url`
+      사용할 HTTP request 방식을 정한다. 기본값은 `get`이다.
 
-   3. `headers`
+      1. `get`
 
-   4. `data`
+         `get`은 서버에서 데이터를 받아서 보여줄 때 사용한다.
 
-   5. `params`
+         ```javascript
+         const getData = async () => {
+           const response = await axios.get("URL");
+           console.log(response.data);
+         };
+         ```
 
-   6. `responseType`
+      2. `post`
+
+         `post`는 리소스를 새롭게 생성할 때 사용한다. 이때 두 번째 인자로 첫 번째의 URL 주소로 보낼 데이터 객체가 들어가게 된다.
+
+         ```javascript
+         const postData = async () => {
+           const response = await axios.post("URL", { data: "data" });
+           console.log(response.data);
+         };
+         ```
+
+      3. `delete`
+
+         이름에서 알 수 있듯, `delete`는 URL 주소에서의 데이터를 삭제한다. 따라서 두 번째 인자를 전달할 필요가 없다.
+
+         ```javascript
+         const deleteData = async () => {
+           const response = await axios.delete("URL");
+           console.log(response.data);
+         };
+         ```
+
+      4. `put`
+
+      5. `patch`
+
+   1. `url`
+
+   1. `headers`
+
+   1. `data`
+
+   1. `params`
+
+   1. `responseType`
 
 ---
 

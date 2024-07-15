@@ -10,6 +10,46 @@ npm install axios
 
 ---
 
+## 개념
+
+1. 정의
+
+---
+
+## 문법
+
+1. 구조
+
+   대략적인 구조는 다음과 같다.
+
+   ```javascript
+   axios({
+     url: "대충 통신할 URL",
+     method: "대충 HTTP 메소드",
+     data: {
+       data: "대충 인자로 보낼 데이터",
+     },
+   });
+   ```
+
+   axios를 이용한 요청 중에서 `url`, `method`와 같은 파라미터 옵션을 추가할 수 있으며, 그 종류는 다음과 같다.
+
+2. 옵션
+
+   1. `method`
+
+   2. `url`
+
+   3. `headers`
+
+   4. `data`
+
+   5. `params`
+
+   6. `responseType`
+
+---
+
 ## 사용
 
 1. api 통신

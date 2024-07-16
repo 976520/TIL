@@ -24,24 +24,21 @@
 
 ## 문법
 
-```javascript
-import React from "react";
+아래 코드의 함수 컴포넌트는 매개변수로 받은 props를 `return()`안에서 사용하고 있다.
 
+```javascript
 function Example(props) {
   return (
     <div>
-      <p>data: {props.data}</p>
+      <p>{props.data}</p>
     </div>
   );
 }
-
-export default Example;
 ```
 
-```javascript
-import React from "react";
-import Example from "./Example.jsx";
+아래 코드에서는 컴포넌트를 사용할 때 태그 안의 속성으로 props를 전달하고 있다.
 
+```javascript
 function App() {
   return (
     <div>
@@ -49,6 +46,4 @@ function App() {
     </div>
   );
 }
-
-export default App;
 ```

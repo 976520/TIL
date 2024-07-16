@@ -6,9 +6,7 @@
 
 ## 이해
 
-1. 개념
-
-   component는 react에서 재사용이 가능한 독립된 모듈을 뜻한다. 여러 UI를 구성할 때 같은 기능을 가진 부분을 반복적으로 만드는 대신 만들어진 component를 조합하여 더 예쁜 코드를 만들 수 있다.
+component는 react에서 재사용이 가능한 독립된 모듈을 뜻한다. 여러 UI를 구성할 때 같은 기능을 가진 부분을 반복적으로 만드는 대신 만들어진 component를 조합하여 더 예쁜 코드를 만들 수 있다.
 
 ---
 
@@ -54,7 +52,7 @@
 
 3. `import`
 
-   `export` 한 component를 `import`를 이용하여 재사용할 수 있다.
+   `export` 한 component를 다른 파일에서 `import`를 이용하여 재사용할 수 있다.
 
    다음 코드에서는 앞서 `export` 한 component를 `import`하여 component 함수 안에서 재사용하고, 그 component를 다시 `export` 하여 다른 파일에서 불러올 수 있도록 하였다.
 

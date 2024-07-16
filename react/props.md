@@ -19,3 +19,36 @@
    react는 데이터의 흐름이 단방향이므로 무조건 부모 component에서 자식 component로 props가 전달되며, 자식 component는 전달받은 props 데이터를 직접 수정할 수 없다.
 
    이 때 자식 component에서 부모 component의 상태를 변경하고 싶다면, callback 함수를 props로 전달하여 사용할 수 있다.
+
+---
+
+## 문법
+
+```javascript
+import React from "react";
+
+function Example(props) {
+  return (
+    <div>
+      <p>data: {props.data}</p>
+    </div>
+  );
+}
+
+export default Example;
+```
+
+```javascript
+import React from "react";
+import Example from "./Example.jsx";
+
+function App() {
+  return (
+    <div>
+      <Example data="im properties" />
+    </div>
+  );
+}
+
+export default App;
+```

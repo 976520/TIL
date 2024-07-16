@@ -1,6 +1,6 @@
 ## useEffect
 
-1. 정의
+1. 이해
 
    `useEffect`는 컴포넌트가 mount됐을 때, unmount됐을 때, 그리고 update됐을 때 특정 작업을 처리시키는 hook이다.
 

@@ -6,7 +6,7 @@ DOM은 Document Object Model(문서 객체 모델)의 약자로 JS에서 HTML의
 
 ---
 
-## DOM 개념
+## DOM 이해
 
 다음과 같은 HTML 문서가 있다고 가정해보자.
 

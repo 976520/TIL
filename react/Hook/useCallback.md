@@ -1,6 +1,6 @@
 ## useCallback
 
-1. 정의
+1. 이해
 
    `useCallback`은 `useMemo`와 유사하게 최적화가 필요한 상황에서 쓰인다. 그러나 useMemo는 특정 결과값을 재사용 할 때 사용했던 반면, `useCallback`은 특정 함수를 재사용하고 싶을 때 사용한다.
 

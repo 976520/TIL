@@ -1,6 +1,6 @@
 ## useMemo
 
-1. 정의
+1. 이해
 
    `useMemo`는 컴포넌트의 성능을 최적화 시키기 위한 hook이다. 이때 Memo는 memoization의 약자이며, 이의 의미는 다음과 같다.
 

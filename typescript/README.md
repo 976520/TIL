@@ -23,7 +23,7 @@
    ```tsx
    const a: number = 3;
    const b: string = "5";
-   // console.log(a*b) 이렇게 작성하면 TS한테 에러메시지로 죽빵맞는다.
+   // console.log(a * b) 이렇게 작성하면 TS한테 에러메시지로 죽빵맞는다.
    ```
 
    때문에 TS에서는 이런것을 바로 에러로 잡아준다(정적 타입). 이러한 타입 선언은 함수에서 더 빛을 낸다.
@@ -38,7 +38,7 @@
 
    반면, Typescript는 인수와 반환값의 type을 명확하게 제시해준다.
 
-   ```jsx
+   ```tsx
    function sum(x: number, y: number): number {
      return x + y;
    }
@@ -63,5 +63,11 @@
 3. 강력한 생태계
 
    TS는 2012년생으로 그리 오래되지 않았음에도 불구하고 방대한 생태계를 보유하고 있다. 이를 증명하듯 React, Vue, Angular 등의 굵직한 프레임워크들이 TS를 지원한다.
+
+   React 초기 개발 환경을 만들어주는 CRA에서 옵션을 하나 추가하여 TS를 사용할 수 있는 환경을 만들 수 있다.
+
+   ```shell
+   npx create-react-app [프로젝트명] --template typescript
+   ```
 
 ---

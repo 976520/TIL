@@ -71,4 +71,13 @@
 
 3. string
 
+   ""나 ''으로 감싸진 문자열 뿐만 아니라 ``로 감싸진 ES6 템플릿 문자열도 들어갈 수 있다.
+
+   ```typescript
+   let name: string = "재욱";
+   let height: string = `${num}cm`;
+   ```
+
+4. array
+
 ---

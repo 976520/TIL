@@ -69,4 +69,6 @@
    const NaN: number = NaN;
    ```
 
+3. string
+
 ---

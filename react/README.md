@@ -12,19 +12,15 @@
 
 2. [component](https://github.com/976520/TIL/blob/main/react/component.md) 구조
 
-   React 개발의 가장 큰 특징은 페이지가 아닌, 특정 기능을 수항하는 독립적인 단위인 component로 시작한다는 것이다. 기획자나 디자이너로부터 앱을 전달받으면, 먼저 component로 나누어 각각의 component를 개발하고 조립하여 복잡한 UI를 구성한다.
-
-   이로 인한 장점은 당연히 앱이 component 더 세세히 분할되어 있기 때문에, 전체 코드를 파악하기 쉽고 유지보수에 용이하다는 것이다.
-
 3. 단방향 바인딩
 
-   각 component는 state를 가진 부모 component에서 props를 이용해 데이터를 마치 arguments(인자) 혹은 attributes(속성)처럼 전달받을 수 있다. 즉, 데이터 전달의 주체는 부모 component이며, 데이터가 부모에서 자식으로 전달됨을 의미한다. 자식 component는 props를 변경할 수 없으며 오직 부모 component만이 그의 상태를 변경할 수 있다.
+   각 [component](https://github.com/976520/TIL/blob/main/react/component.md)는 state를 가진 부모 component에서 [props](https://github.com/976520/TIL/blob/main/react/props.md)를 이용해 데이터를 마치 arguments(인자) 혹은 attributes(속성)처럼 전달받을 수 있다. 즉, 데이터 전달의 주체는 부모 component이며, 데이터가 부모에서 자식으로 전달됨을 의미한다. 자식 component는 props를 변경할 수 없으며 오직 부모 component만이 그의 상태를 변경할 수 있다.
 
    Vue와 Angular는 양방향 바인딩을 한다. 양방향 바인딩은 데이터의 변경과 UI의 상태 변경이 서로 영향을 주며 동시에 업데이트 하는 것이다. 때문에 UI가 복잡해지면 성능이 저하된다는 단점이 있다.
 
    하지만 React는 데이터의 흐름이 한 방향으로 유지되는 단방향 바인딩을 한다. 이러한 단방향 바인딩의 경우 앱의 상태가 어디서 관리되고 있는지를 명확하게 해 주어 데이터의 흐름을 예측하여 디버깅하기 쉽다는 장점이 있다.
 
-4. SPA
+4. [SPA](https://github.com/976520/TIL/blob/main/Web/%ED%8E%98%EC%9D%B4%EC%A7%80%20%EA%B5%AC%EC%84%B1%20%EB%B0%A9%EC%8B%9D/SPA.md)
 
 ---
 

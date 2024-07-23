@@ -78,6 +78,4 @@
    let height: string = `${num}cm`;
    ```
 
-4. array
-
 ---

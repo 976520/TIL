@@ -32,7 +32,7 @@
 
 3. 함수
 
-   콜론을 통해 각각의 매개변수의 타입을 지정할 수 있으며, 소괄호 우측의 콜론을 통해 return값의 타입을 지정할 수 있다. 만약 return값이 없는 함수라면 void를 지정한다.
+   콜론을 통해 각각의 매개변수의 타입을 지정할 수 있으며, 소괄호 우측의 콜론을 통해 return값의 타입을 지정할 수 있다. 만약 return값이 없는 함수라면 `void`를 지정한다.
 
    ```typescript
    function example(param: number): string {
@@ -40,7 +40,7 @@
    }
    ```
 
-   각각의 매개 변수에 다른 타입을 지정해도 무관하다. | 를 통해 두 타입 중 하나를 선택적으로 받을 수 있으며, 이를 union이라고 한다. 또한 ?:을 통해 인자를 선택적으로 전달할 수 있다.
+   각각의 매개 변수에 다른 타입을 지정해도 무관하다. |를 통해 두 타입 중 하나를 선택적으로 받을 수 있으며, 이를 union이라고 한다. 또한 ?:을 통해 인자를 선택적으로 전달할 수 있다.
 
    ```typescript
    const example = (param1: string | number, param2: string, param3?: boolean): void => {};

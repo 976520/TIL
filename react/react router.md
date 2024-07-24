@@ -88,23 +88,23 @@ export default App;
 
    :으로 시작하는 문자열을 사용하면 경로에 파라미터를 지정할 수 있다. 예를 들어 예제 코드의 `/:id` 라는 경로에 `/517`이라는 주소로 접속하면, 실제 `517` 값을 `id` 파라미터로 받는 식이다.
 
-   이 파라미터를 사용하기 위해서는 `useParams`를 이용하면 된다.
+   이 파라미터를 사용하려면 `useParams`라는 hook을 이용하면 된다.
 
 3. Navigate component
 
-   Navigate component가 return될 경우, to 의 prop에 있는 경로로 이동한다.
+   Navigate component가 return될 경우, to 의 prop에 있는 경로로 이동한다. 아래 코드에서는 버튼을 클릭하면 `handleClick` 함수의 return에서 Navigate 컴포넌트의 `/슝` 경로로 이동될 것이다.
 
    ```javascript
    import { Navigate } from "react-router-dom";
 
    function Example() {
-     const onClick = () => {
+     const handleClick = () => {
        return <Navigate to="/슝" />;
      };
 
      return (
        <div>
-         <button onClick={onClick}>click me</button>
+         <button onClick={handleClick}>click me</button>
        </div>
      );
    }

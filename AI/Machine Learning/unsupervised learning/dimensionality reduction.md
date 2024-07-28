@@ -14,7 +14,7 @@
 
 2. 종류
 
-   1. projection
+   1. Projection
 
       선형
 

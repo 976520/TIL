@@ -26,6 +26,48 @@
 
          이를 그림으로 표현하면 다음과 같다.
 
-   2. Manifold Learning
+         ![pca1](https://github.com/user-attachments/assets/6bb3bcbf-8086-47d7-8d88-82af46730c04) ![pca2](https://github.com/user-attachments/assets/385c704a-2401-4b73-b586-ea7e28c3ee2d)
 
-      비선형
+         위쪽 그림의 축에 데이터를 사영시키는 경우보다, 아래쪽의 경우에 큰 분포를 가진다. 시각적으로 봤을 때도 아래쪽 그림의 축이 원래 데이터의 분포를 더 잘 설명하고 있음을 알 수 있다. PCA는 이처럼 분산을 기반으로 주성분을 찾아서 차원을 축소시키는 원리를 가진다.
+
+      2. SVD
+
+3. Manifold Learning
+
+   비선형
+
+   1. LLE
+
+      LLE는 Locally-Linear Embedding의 약자로, 지역적 선형 임베딩은 아래와 같은 거지같이 생긴(swiss roll data) 고차원 데이터도 인접한 데이터를 보존하며 예쁘게 저차원으로 축소할 수 있는 방법이다.
+
+      ![스위스롤](https://github.com/user-attachments/assets/f3944a36-1b20-4d69-867a-db5475c46680)
+
+      우선 각 데이터에게 데이터 간의 거리를 계산하여 k개의 이웃 데이터를 할당한다.이때 전체 데이터 중 i번째를 $x_i$, 이를 기준으로 했을 때 j번째 이웃을 $x_{ij}$, 이의 가중치를 $W_{ij}$라고 가정한다.
+
+      아래의 식은 k개의 이웃들에게 각각 $x_i$를 가장 잘 표현하는 가중치를 부여했을 때 오차 즉, $\displaystyle\sum _{j=1}^k​W_{ij}​x_j​$와 실제 데이터 $x_i$간의 오차를 구하는 비용함수이다.
+
+      > $ε_i(W) = \displaystyle\sum_i|x_i - \displaystyle\sum _{j=1}^kW_{ij}x_j|^2$
+
+      이때 다음과 같은 제약 조건이 있다.
+
+      - 각 데이터는 그들의 이웃으로부터만 재구성된다.
+
+        만일 $x_j$가 $x_i$의 이웃에 속하지 않는다면, $W_{ij}=0$이다.
+
+      - 가중치의 합은 1이다.
+
+        이에 따라 다음 식이 성립한다.
+
+        > $\displaystyle\sum_{j=1}^kW_{ij} = 1$
+
+      이제 이 가중치를 최대한 보장하며 차원을 축소하면 된다. 이때 차원 축소 후의 점을 $y$로 표현하여 차원 축소 전후의 값 차이를 최소화하는 $y_j$를 찾는다.
+
+      > $Φ(W) =\displaystyle\sum_i|y_i - \displaystyle\sum *{j=1}^kW\_{i}ky_j|^2$
+
+   2. T-SNE
+
+      T-SNE는 T-distributed Stochastic Neighbor Embedding의 약자로 선형 기법은 아래와 같은 데이터에서 효과적인 차원 축소가 어려운 반면, T-SNE는 비선형 기법이기에 이와 같은 데이터에서도 유의미한 효과를 보여줄 수 있다.
+
+      ![거지같다](https://github.com/user-attachments/assets/66b2f841-a84d-4aa1-a4ea-64baaf29824f)
+
+      또한 데이터가 유사도가 극명하기만 하다면 선형적, 비선형적 데이터에서 모두 적용할 수 있다는 레전드 장점이 있다.

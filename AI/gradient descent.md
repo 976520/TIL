@@ -58,6 +58,77 @@ optimizer는 최적화 이론 기법이라고 할 수 있다.
 
 ---
 
+## 사용
+
+Javascript로 다음과 같이 간단한 선형 회귀 문제를 경사하강법으로 해결할 수 있다.
+
+```javascript
+// 데이터셋
+const data = [
+  { x: 1, y: 2 },
+  { x: 2, y: 3 },
+  { x: 3, y: 4 },
+  { x: 4, y: 5 },
+];
+
+// weight와 bias 초기화
+let weight = 0;
+let bias = 0;
+
+// 하이퍼파라미터 설정
+const learningRate = 0.01;
+const epochs = 1000;
+
+// 회귀식 예측 (y = wx + b)
+function predict(x) {
+  return weight * x + bias;
+}
+
+// 손실 함수
+function loss() {
+  let totalError = 0;
+  for (let i = 0; i < data.length; i++) {
+    const { x, y } = data[i];
+    const error = predict(x) - y;
+    totalError += error * error;
+  }
+  return totalError / data.length;
+}
+
+// gradient 계산
+function gradientDescent() {
+  let weightGradient = 0;
+  let biasGradient = 0;
+
+  for (let i = 0; i < data.length; i++) {
+    const { x, y } = data[i];
+    const error = predict(x) - y;
+    weightGradient += 2 * error * x;
+    biasGradient += 2 * error;
+  }
+
+  weightGradient /= data.length;
+  biasGradient /= data.length;
+
+  weight -= learningRate * weightGradient;
+  bias -= learningRate * biasGradient;
+}
+
+// 반복
+for (let epoch = 0; epoch < epochs; epoch++) {
+  gradientDescent();
+  if (epoch % 100 === 0) {
+    console.log(`Epoch ${epoch}: Loss = ${loss()}`);
+  }
+}
+
+// 결과 출력
+console.log(`weight: ${weight}`);
+console.log(`bias: ${bias}`);
+```
+
+---
+
 ## 종류
 
 Optimizer에도 여러 종류가 있다. 보통 한 방법론의 단점을 개선하여 발전시키는 방향으로 다른 방법론이 제시되지만, 모든 상황에 특정 optimizer가 가장 성능이 좋다고 단언하기는 어려운 부분이 많다. 데이터셋과 신경망의 특성에 따라 각 optimizer의 성능은 크게 차이가 날 수 있다. 현재로써는 대부분의 상황에 후술할 ADAM 알고리즘을 채택하고는 있지만, 어떤 알고리즘이 가장 적절할 지 실험해 볼 필요성은 아직 다분하다고 할 수 있다.
@@ -78,6 +149,59 @@ Optimizer에도 여러 종류가 있다. 보통 한 방법론의 단점을 개�
 
    기존의 경사하강법은 full batch를 바탕으로 진행하기에 학습 수렴속도가 느리다는 단점이 있었지만, 이 방법은 대량의 데이터에 대한 훈련을 빠르게 수행할 수 있게 한다. 하지만 mini batch의 크기(batch size)와 learning rate에 따라 모델 성능에 큰 영향을 받는다는 단점이 있다.
 
+   JS로 이를 구현하면 다음과 같다.
+
+   ```javascript
+   const data = [
+     { x: 1, y: 2 },
+     { x: 2, y: 3 },
+     { x: 3, y: 4 },
+     { x: 4, y: 5 },
+   ];
+
+   let weight = 0;
+   let bias = 0;
+
+   const learningRate = 0.01;
+   const epochs = 100;
+
+   function predict(x) {
+     return weight * x + bias;
+   }
+
+   function loss() {
+     let totalError = 0;
+     for (let i = 0; i < data.length; i++) {
+       const { x, y } = data[i];
+       const error = predict(x) - y;
+       totalError += error * error;
+     }
+     return totalError / data.length;
+   }
+
+   function stochasticGradientDescent(x, y) {
+     const error = predict(x) - y;
+     const weightGradient = 2 * error * x;
+     const biasGradient = 2 * error;
+
+     weight -= learningRate * weightGradient;
+     bias -= learningRate * biasGradient;
+   }
+
+   for (let epoch = 0; epoch < epochs; epoch++) {
+     for (let i = 0; i < data.length; i++) {
+       const { x, y } = data[i];
+       stochasticGradientDescent(x, y);
+     }
+     if (epoch % 10 === 0) {
+       console.log(`Epoch ${epoch}: Loss = ${loss()}`);
+     }
+   }
+
+   console.log(`weight: ${weight}`);
+   console.log(`bias: ${bias}`);
+   ```
+
 2. Momentum
 
    Momentum은 기존 경사하강법에 가속도항을 추가하여 local minimum 문제를 해결한 경사하강 방법론이며 이의 업데이트 식은 다음과 같다.
@@ -89,6 +213,67 @@ Optimizer에도 여러 종류가 있다. 보통 한 방법론의 단점을 개�
    $v$는 일종의 가속도라고 생각하는 것이 이해가 편하다. $v$의 영향으로 인해 기존 가중치가 이전 업데이트 방향으로 더 크게 변화하게끔 하였다. 당연히 $v$는 처음에 0으로 초기화된다.
 
    또한 $m$은 momentum 운동량 또는 momentum 계수라고 하며, 이를 통해 업데이트가 양의 방향와 음의 방향을 순차적으로 오가며 일어나는 지그재그 현상이 줄어들고, 이전 이동을 고려하여 일정 비율만큼 다음 값을 결정하기에 관성의 효과를 낼 수 있다. 미분계수가 0인 지점에 도달하여도 관성 덕분에 계속 업데이트가 될 수 있다.
+
+   JS로 이를 구현하면 다음과 같다.
+
+   ```javascript
+   const data = [
+     { x: 1, y: 2 },
+     { x: 2, y: 3 },
+     { x: 3, y: 4 },
+     { x: 4, y: 5 },
+   ];
+
+   let weight = 0;
+   let bias = 0;
+
+   const learningRate = 0.01;
+   const momentum = 0.9;
+
+   const epochs = 100;
+
+   let velocityWeight = 0;
+   let velocityBias = 0;
+
+   function predict(x) {
+     return weight * x + bias;
+   }
+
+   function loss() {
+     let totalError = 0;
+     for (let i = 0; i < data.length; i++) {
+       const { x, y } = data[i];
+       const error = predict(x) - y;
+       totalError += error * error;
+     }
+     return totalError / data.length;
+   }
+
+   function stochasticGradientDescentWithMomentum(x, y) {
+     const error = predict(x) - y;
+     const weightGradient = 2 * error * x;
+     const biasGradient = 2 * error;
+
+     velocityWeight = momentum * velocityWeight - learningRate * weightGradient;
+     velocityBias = momentum * velocityBias - learningRate * biasGradient;
+
+     weight += velocityWeight;
+     bias += velocityBias;
+   }
+
+   for (let epoch = 0; epoch < epochs; epoch++) {
+     for (let i = 0; i < data.length; i++) {
+       const { x, y } = data[i];
+       stochasticGradientDescentWithMomentum(x, y);
+     }
+     if (epoch % 10 === 0) {
+       console.log(`Epoch ${epoch}: Loss = ${loss()}`);
+     }
+   }
+
+   console.log(`weight: ${weight}`);
+   console.log(`bias: ${bias}`);
+   ```
 
 3. Adagrad
 

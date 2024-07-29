@@ -57,3 +57,5 @@
       앞서 말한 maximum likelihood estimator을 구하는 알고리즘으로 expectation maximization(기댓값 최대화)이 있다. 이는 우선 한 분포에 대해 데이터의 maximum likelihood estimator가 최대가 될 때 까지 모든 분포에 대해 데이터를 재계산한다. maximum likelihood estimator가 최대가 된다면 이것으로 최종적인 기댓값을 산출한다. 이러한 두 단계를 각각 expectation(예측) 단계와 maximization(최대화) 단계로 명명한다.
 
       이러한 GMM은 데이터의 분포에 대해 굉장히 자유롭다는 장점이 있다.
+
+---

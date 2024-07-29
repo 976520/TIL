@@ -84,7 +84,7 @@ function predict(x) {
   return weight * x + bias;
 }
 
-// 손실 함수
+// loss function
 function loss() {
   let totalError = 0;
   for (let i = 0; i < data.length; i++) {
@@ -141,7 +141,7 @@ Optimizer에도 여러 종류가 있다. 보통 한 방법론의 단점을 개�
 
    SGD는 Stochastic Gradient Descent의 약자로, 확률적 경사하강법이라고 하여 mini batch라고 하는 전체 데이터셋에서 확률적으로 선택된 소규모 데이터 샘플 그룹을 사용하여 각 단계에서 gradient를 계산하고 가중치를 업데이트 하는 방식으로 작동한다.
 
-   앞서 설명했듯, mini batch 내의 각 데이터 포인트에 대한 손실을 계산하고 그에 대한 가중치의 편미분을 수행한다. 이를 통해 손실 함수의 gradient를 산출하고, 이 gradient를 이용하여 가중치를 업데이트한다. 이때 하이퍼파라미터로 정해진 learning rate가 사용되어 가중치를 얼마나 크게 조정할 지 결정한다. ~~가중치의 가중치~~ mini batch 단위로 이 과정을 반복하여 모델을 최적화할 수 있다.
+   앞서 설명했듯, mini batch 내의 각 데이터 포인트에 대한 손실을 계산하고 그에 대한 가중치의 편미분을 수행한다. 이를 통해 loss function의 gradient를 산출하고, 이 gradient를 이용하여 가중치를 업데이트한다. 이때 하이퍼파라미터로 정해진 learning rate가 사용되어 가중치를 얼마나 크게 조정할 지 결정한다. ~~가중치의 가중치~~ mini batch 단위로 이 과정을 반복하여 모델을 최적화할 수 있다.
 
    업데이트 식은 다음과 같으며 이는 경사하강법과 동일하다. SGD와 경사하강법의 차이는 오직 입력된 데이터에서만 존재한다.
 
@@ -293,6 +293,67 @@ Optimizer에도 여러 종류가 있다. 보통 한 방법론의 단점을 개�
 
    Adagrad의 장점은 learning rate를 신경쓰지 않아도 된다는 것에 있다. 하지만 학습을 계속 진행함에 따라 step size가 지나치게 줄어들어 거의 움직이지 않는 상태가 된다는 단점이 있다. 앞선 식에서 알 수 있듯, $G$에서 계속 제곱된 값을 할당해주기 때문에 $G$의 값들은 계속 빠르게 증가(property of monotonic increasing)하기 때문이다.
 
+   JS로 이를 구현하면 다음과 같다.
+
+   ```javascript
+   const data = [
+     { x: 1, y: 2 },
+     { x: 2, y: 3 },
+     { x: 3, y: 4 },
+     { x: 4, y: 5 },
+   ];
+
+   let weight = 0;
+   let bias = 0;
+
+   const learningRate = 0.01;
+   const epochs = 100;
+
+   let gradSquaredWeight = 0;
+   let gradSquaredBias = 0;
+
+   const epsilon = 1e-8;
+
+   function predict(x) {
+     return weight * x + bias;
+   }
+
+   function loss() {
+     let totalError = 0;
+     for (let i = 0; i < data.length; i++) {
+       const { x, y } = data[i];
+       const error = predict(x) - y;
+       totalError += error * error;
+     }
+     return totalError / data.length;
+   }
+
+   function adagrad(x, y) {
+     const error = predict(x) - y;
+     const weightGradient = 2 * error * x;
+     const biasGradient = 2 * error;
+
+     gradSquaredWeight += weightGradient * weightGradient;
+     gradSquaredBias += biasGradient * biasGradient;
+
+     weight -= (learningRate / Math.sqrt(gradSquaredWeight + epsilon)) * weightGradient;
+     bias -= (learningRate / Math.sqrt(gradSquaredBias + epsilon)) * biasGradient;
+   }
+
+   for (let epoch = 0; epoch < epochs; epoch++) {
+     for (let i = 0; i < data.length; i++) {
+       const { x, y } = data[i];
+       adagrad(x, y);
+     }
+     if (epoch % 10 === 0) {
+       console.log(`Epoch ${epoch}: Loss = ${loss()}`);
+     }
+   }
+
+   console.log(`weight: ${weight}`);
+   console.log(`bias: ${bias}`);
+   ```
+
 4. RMSProp
 
    RMSProp은 adagrad의 $G_t$ 값이 무한히 커지는 문제를 지수 가중 이동 평균을 이용해 방지한 방법론이다. $G_t$를 합이 아니라 지수 가중 이동 평균으로 대체함으로써, $G_t$가 최근 변화량의 변수간 상대적인 크기 차이를 유지한다.
@@ -348,5 +409,82 @@ Optimizer에도 여러 종류가 있다. 보통 한 방법론의 단점을 개�
    > $x_t=x_{t-1}-\frac{η}{\sqrt{\hat{v}_t}+ϵ}\frac{\sqrt{1-β_2^t}}{1-β_1^t}\hat{m}_t$
 
    여기서 $β_1$과 $β_2$는 1차, 2차 모먼트 추정치의 지수적 감쇠율이며, 보통 각각 0.9, 0.999를 취한다. 또한 $\hat{m}_t$ 앞의 항은 unbiased estimator(비편향 추정량)가 되기 위해 붙인 항이며 크게 중요하지 않다.
+
+   이를 JS로 구현하면 다음과 같다.
+
+   ```javascript
+   const data = [
+     { x: 1, y: 2 },
+     { x: 2, y: 3 },
+     { x: 3, y: 4 },
+     { x: 4, y: 5 },
+   ];
+
+   let weight = 0;
+   let bias = 0;
+
+   const learningRate = 0.01;
+   const epochs = 100;
+
+   const beta1 = 0.9;
+   const beta2 = 0.999;
+   const epsilon = 1e-8;
+
+   let mWeight = 0;
+   let vWeight = 0;
+   let mBias = 0;
+   let vBias = 0;
+
+   let t = 0;
+
+   function predict(x) {
+     return weight * x + bias;
+   }
+
+   function loss() {
+     let totalError = 0;
+     for (let i = 0; i < data.length; i++) {
+       const { x, y } = data[i];
+       const error = predict(x) - y;
+       totalError += error * error;
+     }
+     return totalError / data.length;
+   }
+
+   function adam(x, y) {
+     const error = predict(x) - y;
+     const weightGradient = 2 * error * x;
+     const biasGradient = 2 * error;
+
+     t += 1;
+
+     mWeight = beta1 * mWeight + (1 - beta1) * weightGradient;
+     mBias = beta1 * mBias + (1 - beta1) * biasGradient;
+
+     vWeight = beta2 * vWeight + (1 - beta2) * weightGradient * weightGradient;
+     vBias = beta2 * vBias + (1 - beta2) * biasGradient * biasGradient;
+
+     const mWeightHat = mWeight / (1 - Math.pow(beta1, t));
+     const mBiasHat = mBias / (1 - Math.pow(beta1, t));
+     const vWeightHat = vWeight / (1 - Math.pow(beta2, t));
+     const vBiasHat = vBias / (1 - Math.pow(beta2, t));
+
+     weight -= (learningRate * mWeightHat) / (Math.sqrt(vWeightHat) + epsilon);
+     bias -= (learningRate * mBiasHat) / (Math.sqrt(vBiasHat) + epsilon);
+   }
+
+   for (let epoch = 0; epoch < epochs; epoch++) {
+     for (let i = 0; i < data.length; i++) {
+       const { x, y } = data[i];
+       adam(x, y);
+     }
+     if (epoch % 10 === 0) {
+       console.log(`Epoch ${epoch}: Loss = ${loss()}`);
+     }
+   }
+
+   console.log(`weight: ${weight}`);
+   console.log(`bias: ${bias}`);
+   ```
 
 ---

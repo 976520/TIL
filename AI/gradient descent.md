@@ -511,7 +511,7 @@ Optimizer에도 여러 종류가 있다. 보통 한 방법론의 단점을 개�
 
    3. 사용
 
-      Javascript로 다음과 같이 간단한 선형 회귀 문제를 adam로 해결할 수 있다.
+      Javascript로 다음과 같이 간단한 선형 회귀 문제를 adam으로 해결할 수 있다.
 
       ```javascript
       const data = [

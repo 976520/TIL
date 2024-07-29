@@ -139,413 +139,453 @@ Optimizer에도 여러 종류가 있다. 보통 한 방법론의 단점을 개�
 
 1. SGD
 
-   SGD는 Stochastic Gradient Descent의 약자로, 확률적 경사하강법이라고 하여 mini batch라고 하는 전체 데이터셋에서 확률적으로 선택된 소규모 데이터 샘플 그룹을 사용하여 각 단계에서 gradient를 계산하고 가중치를 업데이트 하는 방식으로 작동한다.
+   1. 개념
 
-   앞서 설명했듯, mini batch 내의 각 데이터 포인트에 대한 손실을 계산하고 그에 대한 가중치의 편미분을 수행한다. 이를 통해 loss function의 gradient를 산출하고, 이 gradient를 이용하여 가중치를 업데이트한다. 이때 하이퍼파라미터로 정해진 learning rate가 사용되어 가중치를 얼마나 크게 조정할 지 결정한다. ~~가중치의 가중치~~ mini batch 단위로 이 과정을 반복하여 모델을 최적화할 수 있다.
+      SGD는 Stochastic Gradient Descent의 약자로, 확률적 경사하강법이라고 하여 mini batch라고 하는 전체 데이터셋에서 확률적으로 선택된 소규모 데이터 샘플 그룹을 사용하여 각 단계에서 gradient를 계산하고 가중치를 업데이트 하는 방식으로 작동한다.
 
-   업데이트 식은 다음과 같으며 이는 경사하강법과 동일하다. SGD와 경사하강법의 차이는 오직 입력된 데이터에서만 존재한다.
+      기존의 경사하강법은 full batch를 바탕으로 진행하기에 학습 수렴속도가 느리다는 단점이 있었지만, 이 방법은 대량의 데이터에 대한 훈련을 빠르게 수행할 수 있게 한다. 하지만 mini batch의 크기(batch size)와 learning rate에 따라 모델 성능에 큰 영향을 받는다는 단점이 있다.
 
-   > $x_{t+1}$ $=$ $x_t - η \frac{∂f}{∂x}(x_t)$
+   2. 알고리즘
 
-   기존의 경사하강법은 full batch를 바탕으로 진행하기에 학습 수렴속도가 느리다는 단점이 있었지만, 이 방법은 대량의 데이터에 대한 훈련을 빠르게 수행할 수 있게 한다. 하지만 mini batch의 크기(batch size)와 learning rate에 따라 모델 성능에 큰 영향을 받는다는 단점이 있다.
+      앞서 설명했듯, mini batch 내의 각 데이터 포인트에 대한 손실을 계산하고 그에 대한 가중치의 편미분을 수행한다. 이를 통해 loss function의 gradient를 산출하고, 이 gradient를 이용하여 가중치를 업데이트한다. 이때 하이퍼파라미터로 정해진 learning rate가 사용되어 가중치를 얼마나 크게 조정할 지 결정한다. ~~가중치의 가중치~~ mini batch 단위로 이 과정을 반복하여 모델을 최적화할 수 있다.
 
-   Javascript로 다음과 같이 간단한 선형 회귀 문제를 SGD로 해결할 수 있다.
+      업데이트 식은 다음과 같으며 이는 경사하강법과 동일하다. SGD와 경사하강법의 차이는 오직 입력된 데이터에서만 존재한다.
 
-   ```javascript
-   const data = [
-     { x: 1, y: 2 },
-     { x: 2, y: 3 },
-     { x: 3, y: 4 },
-     { x: 4, y: 5 },
-   ];
+      > $x_{t+1}$ $=$ $x_t - η \frac{∂f}{∂x}(x_t)$
 
-   let weight = 0;
-   let bias = 0;
+   3. 사용
 
-   const learningRate = 0.01;
-   const epochs = 100;
+      Javascript로 다음과 같이 간단한 선형 회귀 문제를 SGD로 해결할 수 있다.
 
-   function predict(x) {
-     return weight * x + bias;
-   }
+      ```javascript
+      const data = [
+        { x: 1, y: 2 },
+        { x: 2, y: 3 },
+        { x: 3, y: 4 },
+        { x: 4, y: 5 },
+      ];
 
-   function loss() {
-     let totalError = 0;
-     for (let i = 0; i < data.length; i++) {
-       const { x, y } = data[i];
-       const error = predict(x) - y;
-       totalError += error * error;
-     }
-     return totalError / data.length;
-   }
+      let weight = 0;
+      let bias = 0;
 
-   function stochasticGradientDescent(x, y) {
-     const error = predict(x) - y;
-     const weightGradient = 2 * error * x;
-     const biasGradient = 2 * error;
+      const learningRate = 0.01;
+      const epochs = 100;
 
-     weight -= learningRate * weightGradient;
-     bias -= learningRate * biasGradient;
-   }
+      function predict(x) {
+        return weight * x + bias;
+      }
 
-   for (let epoch = 0; epoch < epochs; epoch++) {
-     for (let i = 0; i < data.length; i++) {
-       const { x, y } = data[i];
-       stochasticGradientDescent(x, y);
-     }
-     if (epoch % 10 === 0) {
-       console.log(`Epoch ${epoch}: Loss = ${loss()}`);
-     }
-   }
+      function loss() {
+        let totalError = 0;
+        for (let i = 0; i < data.length; i++) {
+          const { x, y } = data[i];
+          const error = predict(x) - y;
+          totalError += error * error;
+        }
+        return totalError / data.length;
+      }
 
-   console.log(`weight: ${weight}`);
-   console.log(`bias: ${bias}`);
-   ```
+      function stochasticGradientDescent(x, y) {
+        const error = predict(x) - y;
+        const weightGradient = 2 * error * x;
+        const biasGradient = 2 * error;
+
+        weight -= learningRate * weightGradient;
+        bias -= learningRate * biasGradient;
+      }
+
+      for (let epoch = 0; epoch < epochs; epoch++) {
+        for (let i = 0; i < data.length; i++) {
+          const { x, y } = data[i];
+          stochasticGradientDescent(x, y);
+        }
+        if (epoch % 10 === 0) {
+          console.log(`Epoch ${epoch}: Loss = ${loss()}`);
+        }
+      }
+
+      console.log(`weight: ${weight}`);
+      console.log(`bias: ${bias}`);
+      ```
 
 2. Momentum
 
-   Momentum은 기존 경사하강법에 가속도항을 추가하여 local minimum 문제를 해결한 경사하강 방법론이며 이의 업데이트 식은 다음과 같다.
+   1. 개념
 
-   > $v_{t+1}=mv_t-η\frac{∂L}{∂W}$
+      Momentum은 기존 경사하강법에 가속도항을 추가하여 local minimum 문제를 해결한 경사하강 방법론이다.
 
-   > $W_{t+1} = W_t + v_t$
+   2. 알고리즘
 
-   $v$는 일종의 가속도라고 생각하는 것이 이해가 편하다. $v$의 영향으로 인해 기존 가중치가 이전 업데이트 방향으로 더 크게 변화하게끔 하였다. 당연히 $v$는 처음에 0으로 초기화된다.
+      가속도 $v$에 대한 식은 다음과 같다.
 
-   또한 $m$은 momentum 운동량 또는 momentum 계수라고 하며, 이를 통해 업데이트가 양의 방향와 음의 방향을 순차적으로 오가며 일어나는 지그재그 현상이 줄어들고, 이전 이동을 고려하여 일정 비율만큼 다음 값을 결정하기에 관성의 효과를 낼 수 있다. 미분계수가 0인 지점에 도달하여도 관성 덕분에 계속 업데이트가 될 수 있다.
+      > $v_{t+1}=mv_t-η\frac{∂L}{∂x}$
 
-   Javascript로 다음과 같이 간단한 선형 회귀 문제를 momentum으로 해결할 수 있다.
+      $v$의 영향으로 인해 기존 가중치가 이전 업데이트 방향으로 더 크게 변화하게끔 하였다. 당연히 $v$는 처음에 0으로 초기화된다.
 
-   ```javascript
-   const data = [
-     { x: 1, y: 2 },
-     { x: 2, y: 3 },
-     { x: 3, y: 4 },
-     { x: 4, y: 5 },
-   ];
+      또한 $m$은 momentum 운동량 또는 momentum 계수라고 하며, 이를 통해 업데이트가 양의 방향와 음의 방향을 순차적으로 오가며 일어나는 지그재그 현상이 줄어들고, 이전 이동을 고려하여 일정 비율만큼 다음 값을 결정하기에 관성의 효과를 낼 수 있다.
 
-   let weight = 0;
-   let bias = 0;
+      업데이트 식은 다음과 같다.
 
-   const learningRate = 0.01;
-   const momentum = 0.9;
+      > $x_{t+1} = x_t + v_t$
 
-   const epochs = 100;
+      $v$에 따른 관성 효과 덕분에 미분계수가 0인 지점에 도달하여도 계속 업데이트가 될 수 있다.
 
-   let velocityWeight = 0;
-   let velocityBias = 0;
+   3. 사용
 
-   function predict(x) {
-     return weight * x + bias;
-   }
+      Javascript로 다음과 같이 간단한 선형 회귀 문제를 momentum으로 해결할 수 있다.
 
-   function loss() {
-     let totalError = 0;
-     for (let i = 0; i < data.length; i++) {
-       const { x, y } = data[i];
-       const error = predict(x) - y;
-       totalError += error * error;
-     }
-     return totalError / data.length;
-   }
+      ```javascript
+      const data = [
+        { x: 1, y: 2 },
+        { x: 2, y: 3 },
+        { x: 3, y: 4 },
+        { x: 4, y: 5 },
+      ];
 
-   function stochasticGradientDescentWithMomentum(x, y) {
-     const error = predict(x) - y;
-     const weightGradient = 2 * error * x;
-     const biasGradient = 2 * error;
+      let weight = 0;
+      let bias = 0;
 
-     velocityWeight = momentum * velocityWeight - learningRate * weightGradient;
-     velocityBias = momentum * velocityBias - learningRate * biasGradient;
+      const learningRate = 0.01;
+      const momentum = 0.9;
 
-     weight += velocityWeight;
-     bias += velocityBias;
-   }
+      const epochs = 100;
 
-   for (let epoch = 0; epoch < epochs; epoch++) {
-     for (let i = 0; i < data.length; i++) {
-       const { x, y } = data[i];
-       stochasticGradientDescentWithMomentum(x, y);
-     }
-     if (epoch % 10 === 0) {
-       console.log(`Epoch ${epoch}: Loss = ${loss()}`);
-     }
-   }
+      let velocityWeight = 0;
+      let velocityBias = 0;
 
-   console.log(`weight: ${weight}`);
-   console.log(`bias: ${bias}`);
-   ```
+      function predict(x) {
+        return weight * x + bias;
+      }
+
+      function loss() {
+        let totalError = 0;
+        for (let i = 0; i < data.length; i++) {
+          const { x, y } = data[i];
+          const error = predict(x) - y;
+          totalError += error * error;
+        }
+        return totalError / data.length;
+      }
+
+      function stochasticGradientDescentWithMomentum(x, y) {
+        const error = predict(x) - y;
+        const weightGradient = 2 * error * x;
+        const biasGradient = 2 * error;
+
+        velocityWeight = momentum * velocityWeight - learningRate * weightGradient;
+        velocityBias = momentum * velocityBias - learningRate * biasGradient;
+
+        weight += velocityWeight;
+        bias += velocityBias;
+      }
+
+      for (let epoch = 0; epoch < epochs; epoch++) {
+        for (let i = 0; i < data.length; i++) {
+          const { x, y } = data[i];
+          stochasticGradientDescentWithMomentum(x, y);
+        }
+        if (epoch % 10 === 0) {
+          console.log(`Epoch ${epoch}: Loss = ${loss()}`);
+        }
+      }
+
+      console.log(`weight: ${weight}`);
+      console.log(`bias: ${bias}`);
+      ```
 
 3. Adagrad
 
-   Adagrad는 ADAptive GRADient descent의 약자로, 적응형 하강법이라는 뜻이다. 각각의 매개변수에 대해 learning rate를 동적으로 조절해주는 원리이다. Adagrad는 뉴럴 네트워크 내부에서 많이 변화한 변수에 대해서는 learning rate를 적게 하고, 그렇지 않은 변수에 대해서는 learning rate를 크게 한다. 많이 변화한 변수는 최소점에 가까워졌을 것이라고 생각하고 세밀하게 조정하며, 반대로 적게 변화한 변수는 learning rate를 크게 하여 loss를 줄인다.
+   1. 개념
 
-   업데이트 식은 다음과 같다. 이때 $ϵ$는 0으로 나눠지는 것을 방지하기 위한 상수이며, 보통 $10^{-4}$ 에서 $10^{-8}$ 사이의 값을 취한다.
+      Adagrad는 ADAptive GRADient descent의 약자로, 적응형 하강법이라는 뜻이다. 각각의 매개변수에 대해 learning rate를 동적으로 조절해주는 원리이다. Adagrad는 뉴럴 네트워크 내부에서 많이 변화한 변수에 대해서는 learning rate를 적게 하고, 그렇지 않은 변수에 대해서는 learning rate를 크게 한다. 많이 변화한 변수는 최소점에 가까워졌을 것이라고 생각하고 세밀하게 조정하며, 반대로 적게 변화한 변수는 learning rate를 크게 하여 loss를 줄인다. 따라서 adagrad의 장점은 learning rate를 신경쓰지 않아도 된다는 것에 있다.
 
-   > $x_{t+1} = x_t - \frac{η}{\sqrt{G_t+ϵ}}\frac{∂f}{∂x}(x_t)$
+   2. 알고리즘
 
-   다음은 gradient를 누적하는 식이며, 처음에 0으로 초기화된다. 간단히 얼마나 많이 변화했는지에 대한 정보를 저장한다고 이해하면 된다.
+      업데이트 식은 다음과 같다. 이때 $ϵ$는 0으로 나눠지는 것을 방지하기 위한 상수이며, 보통 $10^{-4}$ 에서 $10^{-8}$ 사이의 값을 취한다.
 
-   > $G_t=G_{t−1}+(\frac{∂f}{∂x}(x_t))^2$
+      > $x_{t+1} = x_t - \frac{η}{\sqrt{G_t+ϵ}}\frac{∂f}{∂x}(x_t)$
 
-   위 두 식을 합쳐서 다음과 같이 표현하기도 한다.
+      다음은 gradient를 누적하는 식이며, 처음에 0으로 초기화된다. 간단히 얼마나 많이 변화했는지에 대한 정보를 저장한다고 이해하면 된다.
 
-   > $x_{t+1} = x_t - \frac{η}{\sqrt{\displaystyle\sum^t_{i=1}{(\frac{∂f}{∂x}(x_i))^2}+ϵ}}\frac{∂f}{∂x}(x_t)$
+      > $G_t=G_{t−1}+(\frac{∂f}{∂x}(x_t))^2$
 
-   Adagrad의 장점은 learning rate를 신경쓰지 않아도 된다는 것에 있다. 하지만 학습을 계속 진행함에 따라 step size가 지나치게 줄어들어 거의 움직이지 않는 상태가 된다는 단점이 있다. 앞선 식에서 알 수 있듯, $G$에서 계속 제곱된 값을 할당해주기 때문에 $G$의 값들은 계속 빠르게 증가(property of monotonic increasing)하기 때문이다.
+      gradient를 누적하는 식을 합쳐서 업데이트 식을 다음과 같이 표현하기도 한다.
 
-   Javascript로 다음과 같이 간단한 선형 회귀 문제를 adagrad로 해결할 수 있다.
+      > $x_{t+1} = x_t - \frac{η}{\sqrt{\displaystyle\sum^t_{i=1}{(\frac{∂f}{∂x}(x_i))^2}+ϵ}}\frac{∂f}{∂x}(x_t)$
 
-   ```javascript
-   const data = [
-     { x: 1, y: 2 },
-     { x: 2, y: 3 },
-     { x: 3, y: 4 },
-     { x: 4, y: 5 },
-   ];
+      학습을 계속 진행함에 따라 step size가 지나치게 줄어들어 거의 움직이지 않는 상태가 된다는 단점이 있다. 앞선 식에서 알 수 있듯, $G$에서 계속 제곱된 값을 할당해주기 때문에 $G$의 값들은 계속 빠르게 증가(property of monotonic increasing)하기 때문이다.
 
-   let weight = 0;
-   let bias = 0;
+   3. 사용
 
-   const learningRate = 0.01;
-   const epochs = 100;
+      Javascript로 다음과 같이 간단한 선형 회귀 문제를 adagrad로 해결할 수 있다.
 
-   let gradSquaredWeight = 0;
-   let gradSquaredBias = 0;
+      ```javascript
+      const data = [
+        { x: 1, y: 2 },
+        { x: 2, y: 3 },
+        { x: 3, y: 4 },
+        { x: 4, y: 5 },
+      ];
 
-   const epsilon = 1e-8;
+      let weight = 0;
+      let bias = 0;
 
-   function predict(x) {
-     return weight * x + bias;
-   }
+      const learningRate = 0.01;
+      const epochs = 100;
 
-   function loss() {
-     let totalError = 0;
-     for (let i = 0; i < data.length; i++) {
-       const { x, y } = data[i];
-       const error = predict(x) - y;
-       totalError += error * error;
-     }
-     return totalError / data.length;
-   }
+      let gradSquaredWeight = 0;
+      let gradSquaredBias = 0;
 
-   function adagrad(x, y) {
-     const error = predict(x) - y;
-     const weightGradient = 2 * error * x;
-     const biasGradient = 2 * error;
+      const epsilon = 1e-8;
 
-     gradSquaredWeight += weightGradient * weightGradient;
-     gradSquaredBias += biasGradient * biasGradient;
+      function predict(x) {
+        return weight * x + bias;
+      }
 
-     weight -= (learningRate / Math.sqrt(gradSquaredWeight + epsilon)) * weightGradient;
-     bias -= (learningRate / Math.sqrt(gradSquaredBias + epsilon)) * biasGradient;
-   }
+      function loss() {
+        let totalError = 0;
+        for (let i = 0; i < data.length; i++) {
+          const { x, y } = data[i];
+          const error = predict(x) - y;
+          totalError += error * error;
+        }
+        return totalError / data.length;
+      }
 
-   for (let epoch = 0; epoch < epochs; epoch++) {
-     for (let i = 0; i < data.length; i++) {
-       const { x, y } = data[i];
-       adagrad(x, y);
-     }
-     if (epoch % 10 === 0) {
-       console.log(`Epoch ${epoch}: Loss = ${loss()}`);
-     }
-   }
+      function adagrad(x, y) {
+        const error = predict(x) - y;
+        const weightGradient = 2 * error * x;
+        const biasGradient = 2 * error;
 
-   console.log(`weight: ${weight}`);
-   console.log(`bias: ${bias}`);
-   ```
+        gradSquaredWeight += weightGradient * weightGradient;
+        gradSquaredBias += biasGradient * biasGradient;
+
+        weight -= (learningRate / Math.sqrt(gradSquaredWeight + epsilon)) * weightGradient;
+        bias -= (learningRate / Math.sqrt(gradSquaredBias + epsilon)) * biasGradient;
+      }
+
+      for (let epoch = 0; epoch < epochs; epoch++) {
+        for (let i = 0; i < data.length; i++) {
+          const { x, y } = data[i];
+          adagrad(x, y);
+        }
+        if (epoch % 10 === 0) {
+          console.log(`Epoch ${epoch}: Loss = ${loss()}`);
+        }
+      }
+
+      console.log(`weight: ${weight}`);
+      console.log(`bias: ${bias}`);
+      ```
 
 4. RMSProp
 
-   RMSProp은 adagrad의 $G_t$ 값이 무한히 커지는 문제를 지수 가중 이동 평균을 이용해 방지한 방법론이다. $G_t$를 합이 아니라 지수 가중 이동 평균으로 대체함으로써, $G_t$가 최근 변화량의 변수간 상대적인 크기 차이를 유지한다.
+   1. 개념
 
-   지수 가중 이동 평균이란, 최근 값을 예전 값보다 더 영향력있게 반영하기 위해 최근 값과 예전 값에 각각 적절한 가중치를 주어 계산하는 방법이라고 할 수 있다. 이해하기 쉽게 식으로 표현하자면 다음과 같다.
+      RMSProp은 adagrad의 $G_t$ 값이 무한히 커지는 문제를 지수 가중 이동 평균을 이용해 방지한 방법론이다. $G_t$를 합이 아니라 지수 가중 이동 평균으로 대체함으로써, $G_t$가 최근 변화량의 변수간 상대적인 크기 차이를 유지한다.
 
-   > $x_t = αp_t + (1-α)x_{t-1}$
+      지수 가중 이동 평균이란, 최근 값을 예전 값보다 더 영향력있게 반영하기 위해 최근 값과 예전 값에 각각 적절한 가중치를 주어 계산하는 방법이라고 할 수 있다.
 
-   $t$번째 step에서의 지수 이동평균값 $x_t$에서 현재 값을 $p$, 가중치를 $α$로 표현하였다. 예를 들어 가중치 $α$의 값을 다음과 같이 표현할 수 있다.
+      이해하기 쉽게 식으로 표현하자면 다음과 같다.
 
-   > $α = \frac{2}{t+1}$
+      > $x_t = αp_t + (1-α)x_{t-1}$
 
-   $t$는 값의 개수라고도 할 수 있으며, $t$가 0일 경우를 대비하여 1을 더해준 모습이다. 가중치 $α$는 $t$가 작을 수록 커질 것이다. 필터이론에서는 이러한 가중치를 forgetting factor 또는 decaying factor라고 한다. 이를 적용한 RMSProp의 업데이트 식은 다음과 같다.
+      $t$번째 step에서의 지수 이동평균값 $x_t$에서 현재 값을 $p$, 가중치를 $α$로 표현하였다. 예를 들어 가중치 $α$의 값을 다음과 같이 표현할 수 있다.
 
-   > $x_{t+1} = x_t - \frac{η}{\sqrt{E[g^2]_t+ϵ}}\frac{∂f}{∂x}(x_t)$
+      > $α = \frac{2}{t+1}$
 
-   다음은 분모에 있는 gradient 제곱의 지수 가중 이동 평균 $E[g^2]_t$를 수식으로 정의한 것이다.
+      $t$는 값의 개수라고도 할 수 있으며, $t$가 0일 경우를 대비하여 1을 더해준 모습이다. 가중치 $α$는 $t$가 작을 수록 커질 것이다. 필터이론에서는 이러한 가중치를 forgetting factor 또는 decaying factor라고 한다.
 
-   > $E[g^2]_t=γE[g^2]_{t-1}+(1-γ)(\frac{∂f}{∂x}(x_t))^2$
+   2. 알고리즘
 
-   여기서 $ϵ$는 adagrad의 그것과 같은 용도이고, $γ$는 gradient 제곱의 가중치를 조절하는 감쇠 계수로, 보통 0.9정도로 설정된다.
+      지수 가중 이동 평균을 적용한 RMSProp의 업데이트 식은 다음과 같다.
 
-   Javascript로 다음과 같이 간단한 선형 회귀 문제를 RMSProp으로 해결할 수 있다.
+      > $x_{t+1} = x_t - \frac{η}{\sqrt{E[g^2]_t+ϵ}}\frac{∂f}{∂x}(x_t)$
 
-   ```javascript
-   const data = [
-     { x: 1, y: 2 },
-     { x: 2, y: 3 },
-     { x: 3, y: 4 },
-     { x: 4, y: 5 },
-   ];
+      다음은 분모에 있는 gradient 제곱의 지수 가중 이동 평균 $E[g^2]_t$를 수식으로 정의한 것이다.
 
-   let weight = 0;
-   let bias = 0;
+      > $E[g^2]_t=γE[g^2]_{t-1}+(1-γ)(\frac{∂f}{∂x}(x_t))^2$
 
-   const learningRate = 0.01;
-   const epochs = 100;
-   const beta = 0.9;
-   const epsilon = 1e-8;
+      여기서 $ϵ$는 adagrad의 그것과 같은 용도이고, $γ$는 gradient 제곱의 가중치를 조절하는 감쇠 계수로, 보통 0.9정도로 설정된다.
 
-   let gradSquaredWeight = 0;
-   let gradSquaredBias = 0;
+   3. 사용
 
-   function predict(x) {
-     return weight * x + bias;
-   }
+      Javascript로 다음과 같이 간단한 선형 회귀 문제를 RMSProp으로 해결할 수 있다.
 
-   function loss() {
-     let totalError = 0;
-     for (let i = 0; i < data.length; i++) {
-       const { x, y } = data[i];
-       const error = predict(x) - y;
-       totalError += error * error;
-     }
-     return totalError / data.length;
-   }
+      ```javascript
+      const data = [
+        { x: 1, y: 2 },
+        { x: 2, y: 3 },
+        { x: 3, y: 4 },
+        { x: 4, y: 5 },
+      ];
 
-   function rmsprop(x, y) {
-     const error = predict(x) - y;
-     const weightGradient = 2 * error * x;
-     const biasGradient = 2 * error;
+      let weight = 0;
+      let bias = 0;
 
-     gradSquaredWeight = beta * gradSquaredWeight + (1 - beta) * weightGradient * weightGradient;
-     gradSquaredBias = beta * gradSquaredBias + (1 - beta) * biasGradient * biasGradient;
+      const learningRate = 0.01;
+      const epochs = 100;
+      const beta = 0.9;
+      const epsilon = 1e-8;
 
-     weight -= (learningRate / Math.sqrt(gradSquaredWeight + epsilon)) * weightGradient;
-     bias -= (learningRate / Math.sqrt(gradSquaredBias + epsilon)) * biasGradient;
-   }
+      let gradSquaredWeight = 0;
+      let gradSquaredBias = 0;
 
-   for (let epoch = 0; epoch < epochs; epoch++) {
-     for (let i = 0; i < data.length; i++) {
-       const { x, y } = data[i];
-       rmsprop(x, y);
-     }
-     if (epoch % 10 === 0) {
-       console.log(`Epoch ${epoch}: Loss = ${loss()}`);
-     }
-   }
+      function predict(x) {
+        return weight * x + bias;
+      }
 
-   console.log(`weight: ${weight}`);
-   console.log(`bias: ${bias}`);
-   ```
+      function loss() {
+        let totalError = 0;
+        for (let i = 0; i < data.length; i++) {
+          const { x, y } = data[i];
+          const error = predict(x) - y;
+          totalError += error * error;
+        }
+        return totalError / data.length;
+      }
+
+      function rmsprop(x, y) {
+        const error = predict(x) - y;
+        const weightGradient = 2 * error * x;
+        const biasGradient = 2 * error;
+
+        gradSquaredWeight = beta * gradSquaredWeight + (1 - beta) * weightGradient * weightGradient;
+        gradSquaredBias = beta * gradSquaredBias + (1 - beta) * biasGradient * biasGradient;
+
+        weight -= (learningRate / Math.sqrt(gradSquaredWeight + epsilon)) * weightGradient;
+        bias -= (learningRate / Math.sqrt(gradSquaredBias + epsilon)) * biasGradient;
+      }
+
+      for (let epoch = 0; epoch < epochs; epoch++) {
+        for (let i = 0; i < data.length; i++) {
+          const { x, y } = data[i];
+          rmsprop(x, y);
+        }
+        if (epoch % 10 === 0) {
+          console.log(`Epoch ${epoch}: Loss = ${loss()}`);
+        }
+      }
+
+      console.log(`weight: ${weight}`);
+      console.log(`bias: ${bias}`);
+      ```
 
 5. Adam
 
-   Adam(ADAptive Moment estimation)은 RMSProp과 momentum 방식을 결합한 알고리즘이다.
+   1. 개념
 
-   우선 momentum처럼 지금까지 계산한 gradient와
+      Adam(ADAptive Moment estimation)은 RMSProp과 momentum 방식을 결합한 알고리즘이다.
 
-   > $g_t=∇_xJ(x_{t-1})$
+   2. 알고리즘
 
-   그의 지수 평균을 저장하고,
+      우선 momentum처럼 지금까지 계산한 gradient와
 
-   > $m_t=β_1m_{t-1}+(1-β_1)g_t$
+      > $g_t=∇_xJ(x_{t-1})$
 
-   RMSProp의 제곱된 gradient의 지수 가중 이동 평균을 저장한다.
+      그의 지수 평균을 저장하고,
 
-   > $m_t=β_1m_{t-1}+(1-β_1)g_t^2$
+      > $m_t=β_1m_{t-1}+(1-β_1)g_t$
 
-   다만 adam에서는 다음과 같이 초기화가 이루어지기 때문에
+      RMSProp의 제곱된 gradient의 지수 가중 이동 평균을 저장한다.
 
-   > $m = 0$
+      > $m_t=β_1m_{t-1}+(1-β_1)g_t^2$
 
-   > $v = 0$
+      다만 adam에서는 다음과 같이 초기화가 이루어지기 때문에
 
-   학습 초반에 $m_t$와 $v_t$가 0에 가깝게 bias되어 있을 것이라고 추정하고 다음과 같이 이를 보정하는 과정을 거친다.
+      > $m = 0$
 
-   > $\hat{m}_t=\frac{m_t}{1-β_1^t}$
+      > $v = 0$
 
-   > $\hat{v}_t=\frac{v_t}{1-β_2^t}$
+      학습 초반에 $m_t$와 $v_t$가 0에 가깝게 bias되어 있을 것이라고 추정하고 다음과 같이 이를 보정하는 과정을 거친다.
 
-   보정 이후 gradient의 자리에 $\hat{m}_t$를, $G_t$의 자리에 $\hat{v}_t$를 넣으면 다음과 같은 최종적인 업데이트 식이 나온다.
+      > $\hat{m}_t=\frac{m_t}{1-β_1^t}$
 
-   > $x_t=x_{t-1}-\frac{η}{\sqrt{\hat{v}_t}+ϵ}\frac{\sqrt{1-β_2^t}}{1-β_1^t}\hat{m}_t$
+      > $\hat{v}_t=\frac{v_t}{1-β_2^t}$
 
-   여기서 $β_1$과 $β_2$는 1차, 2차 모먼트 추정치의 지수적 감쇠율이며, 보통 각각 0.9, 0.999를 취한다. 또한 $\hat{m}_t$ 앞의 항은 unbiased estimator(비편향 추정량)가 되기 위해 붙인 항이며 크게 중요하지 않다.
+      보정 이후 gradient의 자리에 $\hat{m}_t$를, $G_t$의 자리에 $\hat{v}_t$를 넣으면 다음과 같은 최종적인 업데이트 식이 나온다.
 
-   Javascript로 다음과 같이 간단한 선형 회귀 문제를 adam로 해결할 수 있다.
+      > $x_t=x_{t-1}-\frac{η}{\sqrt{\hat{v}_t}+ϵ}\frac{\sqrt{1-β_2^t}}{1-β_1^t}\hat{m}_t$
 
-   ```javascript
-   const data = [
-     { x: 1, y: 2 },
-     { x: 2, y: 3 },
-     { x: 3, y: 4 },
-     { x: 4, y: 5 },
-   ];
+      여기서 $β_1$과 $β_2$는 1차, 2차 모먼트 추정치의 지수적 감쇠율이며, 보통 각각 0.9, 0.999를 취한다. 또한 $\hat{m}_t$ 앞의 항은 unbiased estimator(비편향 추정량)가 되기 위해 붙인 항이며 크게 중요하지 않다.
 
-   let weight = 0;
-   let bias = 0;
+   3. 사용
 
-   const learningRate = 0.01;
-   const epochs = 100;
+      Javascript로 다음과 같이 간단한 선형 회귀 문제를 adam로 해결할 수 있다.
 
-   const beta1 = 0.9;
-   const beta2 = 0.999;
-   const epsilon = 1e-8;
+      ```javascript
+      const data = [
+        { x: 1, y: 2 },
+        { x: 2, y: 3 },
+        { x: 3, y: 4 },
+        { x: 4, y: 5 },
+      ];
 
-   let mWeight = 0;
-   let vWeight = 0;
-   let mBias = 0;
-   let vBias = 0;
+      let weight = 0;
+      let bias = 0;
 
-   let t = 0;
+      const learningRate = 0.01;
+      const epochs = 100;
 
-   function predict(x) {
-     return weight * x + bias;
-   }
+      const beta1 = 0.9;
+      const beta2 = 0.999;
+      const epsilon = 1e-8;
 
-   function loss() {
-     let totalError = 0;
-     for (let i = 0; i < data.length; i++) {
-       const { x, y } = data[i];
-       const error = predict(x) - y;
-       totalError += error * error;
-     }
-     return totalError / data.length;
-   }
+      let mWeight = 0;
+      let vWeight = 0;
+      let mBias = 0;
+      let vBias = 0;
 
-   function adam(x, y) {
-     const error = predict(x) - y;
-     const weightGradient = 2 * error * x;
-     const biasGradient = 2 * error;
+      let t = 0;
 
-     t += 1;
+      function predict(x) {
+        return weight * x + bias;
+      }
 
-     mWeight = beta1 * mWeight + (1 - beta1) * weightGradient;
-     mBias = beta1 * mBias + (1 - beta1) * biasGradient;
+      function loss() {
+        let totalError = 0;
+        for (let i = 0; i < data.length; i++) {
+          const { x, y } = data[i];
+          const error = predict(x) - y;
+          totalError += error * error;
+        }
+        return totalError / data.length;
+      }
 
-     vWeight = beta2 * vWeight + (1 - beta2) * weightGradient * weightGradient;
-     vBias = beta2 * vBias + (1 - beta2) * biasGradient * biasGradient;
+      function adam(x, y) {
+        const error = predict(x) - y;
+        const weightGradient = 2 * error * x;
+        const biasGradient = 2 * error;
 
-     const mWeightHat = mWeight / (1 - Math.pow(beta1, t));
-     const mBiasHat = mBias / (1 - Math.pow(beta1, t));
-     const vWeightHat = vWeight / (1 - Math.pow(beta2, t));
-     const vBiasHat = vBias / (1 - Math.pow(beta2, t));
+        t += 1;
 
-     weight -= (learningRate * mWeightHat) / (Math.sqrt(vWeightHat) + epsilon);
-     bias -= (learningRate * mBiasHat) / (Math.sqrt(vBiasHat) + epsilon);
-   }
+        mWeight = beta1 * mWeight + (1 - beta1) * weightGradient;
+        mBias = beta1 * mBias + (1 - beta1) * biasGradient;
 
-   for (let epoch = 0; epoch < epochs; epoch++) {
-     for (let i = 0; i < data.length; i++) {
-       const { x, y } = data[i];
-       adam(x, y);
-     }
-     if (epoch % 10 === 0) {
-       console.log(`Epoch ${epoch}: Loss = ${loss()}`);
-     }
-   }
+        vWeight = beta2 * vWeight + (1 - beta2) * weightGradient * weightGradient;
+        vBias = beta2 * vBias + (1 - beta2) * biasGradient * biasGradient;
 
-   console.log(`weight: ${weight}`);
-   console.log(`bias: ${bias}`);
-   ```
+        const mWeightHat = mWeight / (1 - Math.pow(beta1, t));
+        const mBiasHat = mBias / (1 - Math.pow(beta1, t));
+        const vWeightHat = vWeight / (1 - Math.pow(beta2, t));
+        const vBiasHat = vBias / (1 - Math.pow(beta2, t));
+
+        weight -= (learningRate * mWeightHat) / (Math.sqrt(vWeightHat) + epsilon);
+        bias -= (learningRate * mBiasHat) / (Math.sqrt(vBiasHat) + epsilon);
+      }
+
+      for (let epoch = 0; epoch < epochs; epoch++) {
+        for (let i = 0; i < data.length; i++) {
+          const { x, y } = data[i];
+          adam(x, y);
+        }
+        if (epoch % 10 === 0) {
+          console.log(`Epoch ${epoch}: Loss = ${loss()}`);
+        }
+      }
+
+      console.log(`weight: ${weight}`);
+      console.log(`bias: ${bias}`);
+      ```
 
 ---

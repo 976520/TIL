@@ -32,46 +32,48 @@
 
       2. SVD
 
-3. Manifold Learning
+   2. Manifold Learning
 
-   비선형
+      1. LLE
 
-   1. LLE
+         LLE는 Locally-Linear Embedding의 약자로, 지역적 선형 임베딩은 아래와 같은 거지같이 생긴(swiss roll data) 고차원 데이터도 인접한 데이터를 보존하며 예쁘게 저차원으로 축소할 수 있는 방법이다.
 
-      LLE는 Locally-Linear Embedding의 약자로, 지역적 선형 임베딩은 아래와 같은 거지같이 생긴(swiss roll data) 고차원 데이터도 인접한 데이터를 보존하며 예쁘게 저차원으로 축소할 수 있는 방법이다.
+         ![스위스롤](https://github.com/user-attachments/assets/f3944a36-1b20-4d69-867a-db5475c46680)
 
-      ![스위스롤](https://github.com/user-attachments/assets/f3944a36-1b20-4d69-867a-db5475c46680)
+         우선 각 데이터에게 데이터 간의 거리를 계산하여 k개의 이웃 데이터를 할당한다.이때 전체 데이터 중 i번째를 $x_i$, 이를 기준으로 했을 때 j번째 이웃을 $x_{ij}$, 이의 가중치를 $W_{ij}$라고 가정한다.
 
-      우선 각 데이터에게 데이터 간의 거리를 계산하여 k개의 이웃 데이터를 할당한다.이때 전체 데이터 중 i번째를 $x_i$, 이를 기준으로 했을 때 j번째 이웃을 $x_{ij}$, 이의 가중치를 $W_{ij}$라고 가정한다.
+         아래의 식은 k개의 이웃들에게 각각 $x_i$를 가장 잘 표현하는 가중치를 부여했을 때 오차 즉, $\displaystyle\sum _{j=1}^k​W_{ij}​x_j​$와 실제 데이터 $x_i$간의 오차를 구하는 비용함수이다.
 
-      아래의 식은 k개의 이웃들에게 각각 $x_i$를 가장 잘 표현하는 가중치를 부여했을 때 오차 즉, $\displaystyle\sum _{j=1}^k​W_{ij}​x_j​$와 실제 데이터 $x_i$간의 오차를 구하는 비용함수이다.
+         > $ε_i(W) = \displaystyle\sum_i|x_i - \displaystyle\sum _{j=1}^kW_{ij}x_j|^2$
 
-      > $ε_i(W) = \displaystyle\sum_i|x_i - \displaystyle\sum _{j=1}^kW_{ij}x_j|^2$
+         이때 다음과 같은 제약 조건이 있다.
 
-      이때 다음과 같은 제약 조건이 있다.
+         - 각 데이터는 그들의 이웃으로부터만 재구성된다.
 
-      - 각 데이터는 그들의 이웃으로부터만 재구성된다.
+           만일 $x_j$가 $x_i$의 이웃에 속하지 않는다면, $W_{ij}=0$이다.
 
-        만일 $x_j$가 $x_i$의 이웃에 속하지 않는다면, $W_{ij}=0$이다.
+         - 가중치의 합은 1이다.
 
-      - 가중치의 합은 1이다.
+           이에 따라 다음 식이 성립한다.
 
-        이에 따라 다음 식이 성립한다.
+           > $\displaystyle\sum_{j=1}^kW_{ij} = 1$
 
-        > $\displaystyle\sum_{j=1}^kW_{ij} = 1$
+         이제 이 가중치를 최대한 보장하며 차원을 축소하면 된다. 이때 차원 축소 후의 점을 $y$로 표현하여 차원 축소 전후의 값 차이를 최소화하는 $y_j$를 찾는다.
 
-      이제 이 가중치를 최대한 보장하며 차원을 축소하면 된다. 이때 차원 축소 후의 점을 $y$로 표현하여 차원 축소 전후의 값 차이를 최소화하는 $y_j$를 찾는다.
+         > $Φ(W) =\displaystyle\sum_i|y_i - \displaystyle\sum *{j=1}^kW\_{i}ky_j|^2$
 
-      > $Φ(W) =\displaystyle\sum_i|y_i - \displaystyle\sum *{j=1}^kW\_{i}ky_j|^2$
+      2. T-SNE
 
-   2. T-SNE
+         T-SNE는 T-distributed Stochastic Neighbor Embedding의 약자로 선형 기법은 아래와 같은 데이터에서 효과적인 차원 축소가 어려운 반면, T-SNE는 비선형 기법이기에 이와 같은 데이터에서도 유의미한 효과를 보여줄 수 있다.
 
-      T-SNE는 T-distributed Stochastic Neighbor Embedding의 약자로 선형 기법은 아래와 같은 데이터에서 효과적인 차원 축소가 어려운 반면, T-SNE는 비선형 기법이기에 이와 같은 데이터에서도 유의미한 효과를 보여줄 수 있다.
+         ![거지같다](https://github.com/user-attachments/assets/66b2f841-a84d-4aa1-a4ea-64baaf29824f)
 
-      ![거지같다](https://github.com/user-attachments/assets/66b2f841-a84d-4aa1-a4ea-64baaf29824f)
+         또한 데이터가 유사도가 극명하기만 하다면 선형적, 비선형적 데이터에서 모두 적용할 수 있다는 레전드 장점이 있다.
 
-      또한 데이터가 유사도가 극명하기만 하다면 선형적, 비선형적 데이터에서 모두 적용할 수 있다는 레전드 장점이 있다.
+         T-SNE는 우선 고차원 공간 데이터의 유사도와 그에 해당하는 저차원 공간 데이터의 유사도를 각각 계산한다. 데이터들의 유사도는 어떤 기준점을 중심으로 한 정규분포에서 확률밀도에 비례하여 이웃을 선택하면 기준점 포인트가 선택된 포인트를 이웃으로 선택한다는 조건부 확률로 계산된다. 저차원 공간 데이터의 완벽한 표현을 위해 저차원 공간에서의 조건부 확률과 고차원 공간에서의 조건부 확률을 최소화하는 것을 목적으로 한다.
 
-      //아직안끝남
+         한마디로 T-SNE는 경사하강법으로 KL divergence를 최소화하는 알고리즘이다. 하지만 T-SNE는 처리 과정 이후에 input feature를 확인하기 어렵고, 결과만 가지고 무언가를 추론하기에 어려움이 있다는 단점이 존재한다. 따라서 T-SNE는 실질적인 차원 축소 연산 수행보다는 단편적인 시각화 툴로만 사용하는 경우가 많다.
+
+         //아직안끝남
 
 ---

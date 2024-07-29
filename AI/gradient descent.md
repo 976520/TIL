@@ -60,7 +60,7 @@ optimizer는 최적화 이론 기법이라고 할 수 있다.
 
 ## 사용
 
-Javascript로 다음과 같이 간단한 선형 회귀 문제를 경사하강법으로 해결할 수 있다.
+Javascript로 다음과 같이 간단한 선형 [회귀](https://github.com/976520/TIL/blob/main/AI/Machine%20Learning/supervised%20learning/prediction.md) 문제를 경사하강법으로 해결할 수 있다.
 
 ```javascript
 // 데이터셋

@@ -10,13 +10,13 @@
 
 2. 종류
 
-   프로토콜의 대략적인 구조는 다음과 같다.
+   프로토콜의 대략적인 종류는 다음과 같다.
 
    1. [**TCP/IP**](https://github.com/976520/TIL/blob/main/network/TCP%2CIP.md) (Transmission Control Protocol / Internet Protocol)
 
    2. **UDP** (User Datagram Protocol)
 
-      앞서 서술한 TCP와 비슷하나 수신 여부를 확인하여 신뢰성이 높지만 속도가 느린 TCP에 비해 수신 여부를 확인하지 않는 UDP는 신뢰성이 낮지만 속도가 빠르다.
+      수신 여부를 확인하여 신뢰성이 높지만 속도가 느린 TCP에 비해 수신 여부를 확인하지 않는 UDP는 신뢰성이 낮지만 속도가 빠르다.
 
    3. **SMTP** (Simple Mail Transfer Protocol)
 
